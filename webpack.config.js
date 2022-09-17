@@ -4,10 +4,14 @@ module.exports = {
     mode: 'development',
     entry: {
       index: './src/index.ts',
+      test: './src/test.ts',
     },
   output: {
-    filename: 'index.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
   },
   module: {
     rules: [
