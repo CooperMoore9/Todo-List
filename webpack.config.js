@@ -4,7 +4,6 @@ module.exports = {
     mode: 'development',
     entry: {
       index: './src/index.ts',
-      test: './src/test.ts',
     },
   output: {
     filename: '[name].bundle.js',
