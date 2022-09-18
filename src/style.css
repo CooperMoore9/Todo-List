@@ -7,8 +7,20 @@ html {
     margin: 0;
   }
 
-  header, footer {
+  header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
     height: 5vh;
+  }
+
+  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    height: 3vh;
   }
 
   header {
@@ -33,9 +45,9 @@ html {
     width: 85vw;
   }
 
-  .content {
+  #content {
     display: flex;
-    height: 90vh;
+    height: 92vh;
   }
 
   .projectHeader, .taskHeader {
@@ -49,6 +61,8 @@ html {
 
   .projectTasks {
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     gap: .8em;
     padding: .8em;
   }
@@ -61,17 +75,39 @@ html {
     border-style: solid;
     height: 10em;
     width: 10em;
+    overflow: auto;
+    overflow: hidden;
     border-radius: 2em;
     padding: 0.3em;
     gap: 6px;
+  }
+
+  .project.addProject, .task.addTask {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    color: inherit;
+    border: solid;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+
+  .project.addProject:hover, .task.addTask:hover {
+    background-color: lightgrey;
   }
 
   .projects {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: auto;
+    height: 87.72vh;
     gap: 0.8em;
-    padding: 0.8em;    
+    padding: 0.8em;
+    
   }
 
   .project {
@@ -79,10 +115,30 @@ html {
     justify-content: center;
     align-items: center;
     border-style: solid;
-    width: 100%;
-    height: 2em;
+    width: 90%;
+    min-height: 2em;
     border-radius: 2em;
   }
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 
   .project:hover {
     background-color: lightblue;

@@ -14,6 +14,9 @@
 // -add a bin button the the right of projects to delete them (are you sure warning)
 
 import './style.css';
-import {itThisWorking} from './test'
+import { domSetup as dom} from './dom';
+import {projectTask, projectAdd } from './uiManipulation';
 
-console.log(itThisWorking(1, 2));
+dom();
+projectAdd();
+projectTask();

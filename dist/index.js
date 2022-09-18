@@ -11,5 +11,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // -add a bin button on the tasks in the bottom right to delete the tasks
 // -add a bin button the the right of projects to delete them (are you sure warning)
 require("./style.css");
-const test_1 = require("./test");
-console.log((0, test_1.itThisWorking)(1, 2));
+const dom_1 = require("./dom");
+const uiManipulation_1 = require("./uiManipulation");
+(0, dom_1.domSetup)();
+(0, uiManipulation_1.projectAdd)();
+(0, uiManipulation_1.projectTask)();

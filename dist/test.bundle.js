@@ -8,26 +8,7 @@
  */
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
-/******/ 	var __webpack_modules__ = ({
-
-/***/ "./src/test.ts":
-/*!*********************!*\
-  !*** ./src/test.ts ***!
-  \*********************/
-/***/ ((__unused_webpack_module, exports) => {
-
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.itThisWorking = void 0;\r\nfunction itThisWorking(x, y) {\r\n    return x + y;\r\n}\r\nexports.itThisWorking = itThisWorking;\r\n\n\n//# sourceURL=webpack://todo-list/./src/test.ts?");
-
-/***/ })
-
-/******/ 	});
-/************************************************************************/
 /******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./src/test.ts"](0, __webpack_exports__);
 /******/ 	
 /******/ })()
 ;
