@@ -18,14 +18,13 @@ export function domSetup() {
                             <div class="taskTitle">Task 1</div>
                             <div class="taskDue">10/10/2010</div>
                             <div class="taskDesc">desc</div>
-                            
                         </div>
                         <div class="task">
                             <div class="taskTitle">Task 2</div>
                             <div class="taskDue">10/10/2020</div>
                             <div class="taskDesc">desc</div>
-                            
                         </div>
+
                         <button class="task addTask">
                             <div class="taskTitle">Add Task</div>
                             <div class="taskDesc">+</button>
