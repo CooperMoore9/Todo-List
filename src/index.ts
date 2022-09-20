@@ -23,5 +23,9 @@
 
 import './style.css';
 import { domSetup as dom} from './dom';
+import {projectSetup} from './todoSetup'
+import {loopProjects} from './uiUpdater'
 
 dom();
+projectSetup();
+loopProjects();
