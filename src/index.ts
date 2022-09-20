@@ -13,10 +13,15 @@
 // -add a bin button on the tasks in the bottom right to delete the tasks
 // -add a bin button the the right of projects to delete them (are you sure warning)
 
+//localStorage Test
+    // export function catTom(){
+    //     let newCat = 'Phillip'
+    // localStorage.setItem('myCat', newCat)
+    // const cat = localStorage.getItem('myCat')
+    // console.log(cat)
+    // }
+
 import './style.css';
 import { domSetup as dom} from './dom';
-import {projectTask, projectAdd } from './uiManipulation';
 
 dom();
-projectAdd();
-projectTask();

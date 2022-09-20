@@ -551,10 +551,6 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.fixed {
-  position: fixed;
-}
-
 .flex {
   display: flex;
 }
@@ -601,12 +597,14 @@ header {
 
 footer {
   display: flex;
-  position: fixed;
   width: 100%;
   justify-content: center;
   align-items: center;
   font-size: 1em;
-  height: 3vh;
+  min-height: 2vh;
+  border-top-style: solid;
+  border-top-width: 0.1em;
+  border-color: black;
 }
 
 header {
@@ -615,15 +613,10 @@ header {
   border-color: dimgray;
 }
 
-footer {
-  border-top-style: solid;
-  border-top-width: 0.1em;
-  border-color: dimgray;
-}
-
 .sideBar {
-  height: 100%;
+  min-height: 100%;
   width: 15vw;
+  min-width: 140px;
 }
 
 .tasks {
@@ -636,7 +629,7 @@ footer {
 
 #content {
   display: flex;
-  height: 92vh;
+  min-height: 93vh;
 }
 
 .projectHeader, .taskHeader {
@@ -674,6 +667,10 @@ footer {
   gap: 6px;
 }
 
+.project.addProject {
+  min-height: auto;
+}
+
 .project.addProject, .task.addTask {
   display: flex;
   justify-content: center;
@@ -698,7 +695,7 @@ footer {
   flex-direction: column;
   align-items: center;
   overflow: auto;
-  height: 87.72vh;
+  min-height: 87.72vh;
   gap: 0.8em;
   padding: 0.8em;
 }
