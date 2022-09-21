@@ -12,18 +12,12 @@ html {
   }
 
   header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 2em;
     height: 5vh;
   }
 
   footer {
-    display: flex;
     width: 100%;
-    justify-content: center;
-    align-items: center;
     font-size: 1em;
     min-height: 2vh;
     border-top-style: solid;
@@ -120,13 +114,25 @@ html {
     flex-direction: column;
     align-items: center;
     overflow: auto;
-    min-height: 87.72vh;
+    min-height: 84vh;
     gap: 0.8em;
     padding: 0.8em;
     
   }
 
   .project {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-style: solid;
+    border-width: 0.2em;
+    border-color: black;
+    width: 90%;
+    min-height: 2em;
+    border-radius: 2em;
+  }
+
+  .addProject {
     display: flex;
     justify-content: center;
     align-items: center;

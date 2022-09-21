@@ -551,12 +551,58 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.mt-4 {
+  margin-top: 1rem;
+}
+
 .flex {
   display: flex;
 }
 
+.min-w-fit {
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+}
+
+.min-w-\[20\] {
+  min-width: 20;
+}
+
+.min-w-\[200\] {
+  min-width: 200;
+}
+
+.min-w-\[200\%\] {
+  min-width: 200%;
+}
+
+.min-w-\[100\%\] {
+  min-width: 100%;
+}
+
+.max-w-\[100\%\] {
+  max-width: 100%;
+}
+
+.max-w-\[80\%\] {
+  max-width: 80%;
+}
+
 .flex-wrap {
   flex-wrap: wrap;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 .border {
@@ -588,18 +634,12 @@ html {
 }
 
 header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 2em;
   height: 5vh;
 }
 
 footer {
-  display: flex;
   width: 100%;
-  justify-content: center;
-  align-items: center;
   font-size: 1em;
   min-height: 2vh;
   border-top-style: solid;
@@ -695,12 +735,24 @@ header {
   flex-direction: column;
   align-items: center;
   overflow: auto;
-  min-height: 87.72vh;
+  min-height: 84vh;
   gap: 0.8em;
   padding: 0.8em;
 }
 
 .project {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  border-width: 0.2em;
+  border-color: black;
+  width: 90%;
+  min-height: 2em;
+  border-radius: 2em;
+}
+
+.addProject {
   display: flex;
   justify-content: center;
   align-items: center;

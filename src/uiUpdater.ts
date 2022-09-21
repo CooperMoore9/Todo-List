@@ -1,18 +1,26 @@
-import { projectsSetup } from "./todoSetup";
-
+import {projectsSetup } from "./todoSetup";
+export let projectAddButton = document.querySelector('.addProject') as Element;
 let projectList = document.querySelector('.projects') as Element;
 
-export function loopProjects() {
-    
-    
+
 const newDate = new Date(1995, 6, 2)
 
+export function loopProjects() {
+    projectList.innerHTML = ''
     projectsSetup.projects.forEach(project => {
-        if(project.name === 'project1'){
-            project.addTask('bruh', newDate , 'desc')
-            console.log(project)
-            
-        }
+        let div = document.createElement('div')
+        div.classList.add('project')
+        div.classList.add(project.name)
+        div.textContent = project.name
+        projectList.appendChild(div)
     })
-    console.log(projectList)
+    
 }
+    // console.log(projectList)
+    // console.log(projectAddButton)
+
+
+        // if(project.name === 'project1'){
+        //     project.addTask('bruh', newDate , 'desc')
+        //     console.log(project)
+        // }
