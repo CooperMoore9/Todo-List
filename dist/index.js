@@ -1,7 +1,7 @@
 "use strict";
-//Notes
-Object.defineProperty(exports, "__esModule", { value: true });
+//Note
 // -cog wheel on tasks header to change amount of rows
+Object.defineProperty(exports, "__esModule", { value: true });
 // -Add new Projects and Tasks button will always be at bottom/end of list to add new objects
 // -Add new projects
 // -When you click 'Add new Projects' just turn the 'Add new Projects' button to the new project, and move the add new project button down
@@ -11,16 +11,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // -add a bin button on the tasks in the bottom right to delete the tasks
 // -add a bin button the the right of projects to delete them (are you sure warning)
 //localStorage Test
-// export function catTom(){
+// export function catTom()
 //     let newCat = 'Phillip'
 // localStorage.setItem('myCat', newCat)
 // const cat = localStorage.getItem('myCat')
 // console.log(cat)
 // }
 require("./style.css");
-const dom_1 = require("./dom");
 const todoSetup_1 = require("./todoSetup");
 const uiUpdater_1 = require("./uiUpdater");
-(0, dom_1.domSetup)();
 (0, todoSetup_1.projectSetup)();
 (0, uiUpdater_1.loopProjects)();

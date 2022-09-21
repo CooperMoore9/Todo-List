@@ -1,5 +1,4 @@
-//Notes
-
+//Note
 // -cog wheel on tasks header to change amount of rows
 
 // -Add new Projects and Tasks button will always be at bottom/end of list to add new objects
@@ -14,7 +13,7 @@
 // -add a bin button the the right of projects to delete them (are you sure warning)
 
 //localStorage Test
-    // export function catTom(){
+    // export function catTom()
     //     let newCat = 'Phillip'
     // localStorage.setItem('myCat', newCat)
     // const cat = localStorage.getItem('myCat')
@@ -22,10 +21,10 @@
     // }
 
 import './style.css';
-import { domSetup as dom} from './dom';
 import {projectSetup} from './todoSetup'
 import {loopProjects} from './uiUpdater'
 
-dom();
-projectSetup();
-loopProjects();
+    projectSetup();
+    loopProjects();
+
+
