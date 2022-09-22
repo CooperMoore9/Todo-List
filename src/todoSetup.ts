@@ -4,7 +4,7 @@ export let projectsSetup = new AllProjects([])
 
 export function projectSetup() {
 
-    projectsSetup.addProject('project1')
+    projectsSetup.addProject('Project 1')
 
     projectsSetup.logProjects()
 }

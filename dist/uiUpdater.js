@@ -10,7 +10,7 @@ function loopProjects() {
     todoSetup_1.projectsSetup.projects.forEach(project => {
         let div = document.createElement('div');
         div.classList.add('project');
-        div.classList.add(project.name);
+        div.classList.add(`${project.name.replace(/\s/g, '').toLocaleLowerCase()}`);
         div.textContent = project.name;
         projectList.appendChild(div);
     });

@@ -1,3 +1,4 @@
+import { DynamicProjectNumber } from "./addButtons";
 import {projectsSetup } from "./todoSetup";
 export let projectAddButton = document.querySelector('.addProject') as Element;
 let projectList = document.querySelector('.projects') as Element;
@@ -10,7 +11,7 @@ export function loopProjects() {
     projectsSetup.projects.forEach(project => {
         let div = document.createElement('div')
         div.classList.add('project')
-        div.classList.add(project.name)
+        div.classList.add(`${project.name.replace(/\s/g, '').toLocaleLowerCase()}`)
         div.textContent = project.name
         projectList.appendChild(div)
     })

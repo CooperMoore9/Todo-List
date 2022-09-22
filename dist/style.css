@@ -559,46 +559,12 @@ video {
   display: flex;
 }
 
-.min-w-fit {
-  min-width: -webkit-fit-content;
-  min-width: -moz-fit-content;
-  min-width: fit-content;
-}
-
-.min-w-\[20\] {
-  min-width: 20;
-}
-
-.min-w-\[200\] {
-  min-width: 200;
-}
-
-.min-w-\[200\%\] {
-  min-width: 200%;
-}
-
-.min-w-\[100\%\] {
-  min-width: 100%;
-}
-
-.max-w-\[100\%\] {
-  max-width: 100%;
-}
-
-.max-w-\[80\%\] {
-  max-width: 80%;
-}
-
 .flex-wrap {
   flex-wrap: wrap;
 }
 
 .items-center {
   align-items: center;
-}
-
-.justify-end {
-  justify-content: flex-end;
 }
 
 .justify-center {

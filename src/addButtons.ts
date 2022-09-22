@@ -2,10 +2,16 @@ import { projectsSetup } from './todoSetup'
 import {loopProjects} from './uiUpdater'
 let projectAddButton = document.querySelector('.addProject') as Element;
 
+let currentProject = ''
+export let DynamicProjectNumber = 1
+
 export function addProject(){
     projectAddButton.addEventListener('click', () => {
-        console.log('click!')
-        projectsSetup.addProject('project2')
+        projectsSetup.addProject(`Project ${DynamicProjectNumber+=1}`)
         loopProjects();
     })
+}
+
+function addTaskToCurrentProject() {
+
 }
