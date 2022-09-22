@@ -2,7 +2,7 @@ import { projectsSetup } from './todoSetup'
 import {loopProjects} from './uiUpdater'
 let projectAddButton = document.querySelector('.addProject') as Element;
 
-let currentProject = ''
+
 export let DynamicProjectNumber = 1
 
 export function addProject(){

@@ -4,7 +4,6 @@ exports.addProject = exports.DynamicProjectNumber = void 0;
 const todoSetup_1 = require("./todoSetup");
 const uiUpdater_1 = require("./uiUpdater");
 let projectAddButton = document.querySelector('.addProject');
-let currentProject = '';
 exports.DynamicProjectNumber = 1;
 function addProject() {
     projectAddButton.addEventListener('click', () => {
