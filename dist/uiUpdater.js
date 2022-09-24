@@ -5,6 +5,7 @@ const todoSetup_1 = require("./todoSetup");
 exports.projectAddButton = document.querySelector('.addProject');
 let projectList = document.querySelector('.projects');
 let currentProject = 'Project 1';
+const taskHeader = document.querySelector('.taskHeader');
 const newDate = new Date(1995, 6, 2);
 function loopProjects() {
     projectList.innerHTML = '';
@@ -16,13 +17,13 @@ function loopProjects() {
         projectList.appendChild(div);
         div.addEventListener('click', () => {
             currentProject = project.name;
-            console.log(currentProject);
+            taskHeader.textContent = `${currentProject} Tasks`;
+            console.log(project);
         });
     });
 }
 exports.loopProjects = loopProjects;
-function projectSelector() {
-}
+// project.addTask('name', newDate, 'desc')
 // console.log(projectList)
 // console.log(projectAddButton)
 // if(project.name === 'project1'){
