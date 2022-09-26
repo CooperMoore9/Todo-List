@@ -1,10 +1,11 @@
+import { localProjectStorage } from "./storageSetup";
 import {projectsSetup } from "./todoSetup";
 export let projectAddButton = document.querySelector('.addProject') as Element;
 let projectList = document.querySelector('.projects') as Element;
-let currentProject = 'Project 1'
+export let currentProject = 'Project 1'
 const taskHeader = document.querySelector('.taskHeader') as Element
 
-const newDate = new Date(1995, 6, 2)
+
 
 export function loopProjects() {
     projectList.innerHTML = ''
@@ -21,6 +22,14 @@ export function loopProjects() {
             console.log(project)
         })
     })
+    if(localStorage !== null){
+    localProjectStorage()
+    }else {
+        return
+    }
+}
+
+function loopTasks() {
     
 }
 

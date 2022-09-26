@@ -22,10 +22,15 @@
 
 import './style.css';
 import {projectSetup} from './todoSetup'
-import {addProject} from './addButtons'
+import {addProject, addTask} from './addButtons'
 import {loopProjects} from './uiUpdater'
+
+
+
 
     projectSetup();
     addProject();
+    addTask();
     loopProjects();
+    
 

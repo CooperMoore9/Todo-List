@@ -23,4 +23,5 @@ const addButtons_1 = require("./addButtons");
 const uiUpdater_1 = require("./uiUpdater");
 (0, todoSetup_1.projectSetup)();
 (0, addButtons_1.addProject)();
+(0, addButtons_1.addTask)();
 (0, uiUpdater_1.loopProjects)();

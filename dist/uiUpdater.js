@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loopProjects = exports.projectAddButton = void 0;
+exports.loopProjects = exports.currentProject = exports.projectAddButton = void 0;
+const storageSetup_1 = require("./storageSetup");
 const todoSetup_1 = require("./todoSetup");
 exports.projectAddButton = document.querySelector('.addProject');
 let projectList = document.querySelector('.projects');
-let currentProject = 'Project 1';
+exports.currentProject = 'Project 1';
 const taskHeader = document.querySelector('.taskHeader');
-const newDate = new Date(1995, 6, 2);
 function loopProjects() {
     projectList.innerHTML = '';
     todoSetup_1.projectsSetup.projects.forEach(project => {
@@ -16,13 +16,21 @@ function loopProjects() {
         div.textContent = project.name;
         projectList.appendChild(div);
         div.addEventListener('click', () => {
-            currentProject = project.name;
-            taskHeader.textContent = `${currentProject} Tasks`;
+            exports.currentProject = project.name;
+            taskHeader.textContent = `${exports.currentProject} Tasks`;
             console.log(project);
         });
     });
+    if (localStorage !== null) {
+        (0, storageSetup_1.localProjectStorage)();
+    }
+    else {
+        return;
+    }
 }
 exports.loopProjects = loopProjects;
+function loopTasks() {
+}
 // project.addTask('name', newDate, 'desc')
 // console.log(projectList)
 // console.log(projectAddButton)
