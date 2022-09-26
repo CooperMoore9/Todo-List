@@ -8,16 +8,19 @@ let taskAddButton = document.querySelector('.addTask');
 const newDate = new Date(1995, 6, 2);
 exports.DynamicProjectNumber = 1;
 function addProject() {
+    //Quarantine
     projectAddButton.addEventListener('click', () => {
         createProject(`Project ${exports.DynamicProjectNumber += 1}`);
         (0, uiUpdater_1.loopProjects)();
     });
+    //Quarantine
 }
 exports.addProject = addProject;
 function createProject(name) {
     todoSetup_1.projectsSetup.addProject(name);
 }
 function addTask() {
+    //Quarantine
     taskAddButton.addEventListener('click', () => {
         todoSetup_1.projectsSetup.projects.forEach(project => {
             if (project.name === uiUpdater_1.currentProject) {
@@ -25,5 +28,6 @@ function addTask() {
             }
         });
     });
+    //Quarantine
 }
 exports.addTask = addTask;

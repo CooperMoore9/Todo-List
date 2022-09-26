@@ -29,8 +29,4 @@ import {loopProjects} from './uiUpdater'
 
 
     projectSetup();
-    addProject();
-    addTask();
     loopProjects();
-    
-

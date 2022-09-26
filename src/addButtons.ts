@@ -7,10 +7,14 @@ const newDate = new Date(1995, 6, 2)
 export let DynamicProjectNumber = 1
 
 export function addProject(){
+
+//Quarantine
     projectAddButton.addEventListener('click', () => {
         createProject(`Project ${DynamicProjectNumber+=1}`);
         loopProjects();
     })
+//Quarantine
+
 }
 
 function createProject(name:string){
@@ -18,12 +22,17 @@ function createProject(name:string){
 }
 
 export function addTask(){
+
+    
+//Quarantine
     taskAddButton.addEventListener('click', () => {    
         projectsSetup.projects.forEach(project => {
             if(project.name === currentProject){
                 project.addTask('bruh', newDate , 'desc')
             }
-        })
-        
+        })    
     })
+//Quarantine
+
+
 }

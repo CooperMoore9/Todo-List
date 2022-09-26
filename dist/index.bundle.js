@@ -116,7 +116,7 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \***************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.addTask = exports.addProject = exports.DynamicProjectNumber = void 0;\r\nconst todoSetup_1 = __webpack_require__(/*! ./todoSetup */ \"./src/todoSetup.ts\");\r\nconst uiUpdater_1 = __webpack_require__(/*! ./uiUpdater */ \"./src/uiUpdater.ts\");\r\nlet projectAddButton = document.querySelector('.addProject');\r\nlet taskAddButton = document.querySelector('.addTask');\r\nconst newDate = new Date(1995, 6, 2);\r\nexports.DynamicProjectNumber = 1;\r\nfunction addProject() {\r\n    projectAddButton.addEventListener('click', () => {\r\n        createProject(`Project ${exports.DynamicProjectNumber += 1}`);\r\n        (0, uiUpdater_1.loopProjects)();\r\n    });\r\n}\r\nexports.addProject = addProject;\r\nfunction createProject(name) {\r\n    todoSetup_1.projectsSetup.addProject(name);\r\n}\r\nfunction addTask() {\r\n    taskAddButton.addEventListener('click', () => {\r\n        todoSetup_1.projectsSetup.projects.forEach(project => {\r\n            if (project.name === uiUpdater_1.currentProject) {\r\n                project.addTask('bruh', newDate, 'desc');\r\n            }\r\n        });\r\n    });\r\n}\r\nexports.addTask = addTask;\r\n\n\n//# sourceURL=webpack://todo-list/./src/addButtons.ts?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.addTask = exports.addProject = exports.DynamicProjectNumber = void 0;\r\nconst todoSetup_1 = __webpack_require__(/*! ./todoSetup */ \"./src/todoSetup.ts\");\r\nconst uiUpdater_1 = __webpack_require__(/*! ./uiUpdater */ \"./src/uiUpdater.ts\");\r\nlet projectAddButton = document.querySelector('.addProject');\r\nlet taskAddButton = document.querySelector('.addTask');\r\nconst newDate = new Date(1995, 6, 2);\r\nexports.DynamicProjectNumber = 1;\r\nfunction addProject() {\r\n    //Quarantine\r\n    projectAddButton.addEventListener('click', () => {\r\n        createProject(`Project ${exports.DynamicProjectNumber += 1}`);\r\n        (0, uiUpdater_1.loopProjects)();\r\n    });\r\n    //Quarantine\r\n}\r\nexports.addProject = addProject;\r\nfunction createProject(name) {\r\n    todoSetup_1.projectsSetup.addProject(name);\r\n}\r\nfunction addTask() {\r\n    //Quarantine\r\n    taskAddButton.addEventListener('click', () => {\r\n        todoSetup_1.projectsSetup.projects.forEach(project => {\r\n            if (project.name === uiUpdater_1.currentProject) {\r\n                project.addTask('bruh', newDate, 'desc');\r\n            }\r\n        });\r\n    });\r\n    //Quarantine\r\n}\r\nexports.addTask = addTask;\r\n\n\n//# sourceURL=webpack://todo-list/./src/addButtons.ts?");
 
 /***/ }),
 
@@ -124,9 +124,9 @@ eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\n
 /*!**********************************!*\
   !*** ./src/allProjectsObject.ts ***!
   \**********************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, exports) => {
 
-eval("\r\n//Create new Project object when new project is added.\r\n//Probable gonna need an array of projects that can be selected as well.\r\n//Project object needs title, and array of task objects that are stored within the project.\r\n//When tasks are added, create task Object, and store in current Project Object\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.AllProjects = void 0;\r\nconst projectObject_1 = __webpack_require__(/*! ./projectObject */ \"./src/projectObject.ts\");\r\nclass AllProjects {\r\n    constructor(projects) {\r\n        this.projects = projects;\r\n    }\r\n    addProject(name) {\r\n        let newProject = new projectObject_1.Project(name, []);\r\n        this.projects.push(newProject);\r\n    }\r\n    logProjects() {\r\n        console.log(this);\r\n    }\r\n}\r\nexports.AllProjects = AllProjects;\r\n\n\n//# sourceURL=webpack://todo-list/./src/allProjectsObject.ts?");
+eval("\r\n//Create new Project object when new project is added.\r\n//Probable gonna need an array of projects that can be selected as well.\r\n//Project object needs title, and array of task objects that are stored within the project.\r\n//When tasks are added, create task Object, and store in current Project Object\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.Task = exports.AllProjects = void 0;\r\nclass AllProjects {\r\n    constructor(projects) {\r\n        this.projects = projects;\r\n    }\r\n    addProject(name) {\r\n        let newProject = new Project(name, []);\r\n        this.projects.push(newProject);\r\n    }\r\n    logProjects() {\r\n        console.log(this);\r\n    }\r\n}\r\nexports.AllProjects = AllProjects;\r\nclass Project {\r\n    constructor(name, tasks) {\r\n        this.name = name;\r\n        this.tasks = tasks;\r\n    }\r\n    addTask(title, dueDate, description) {\r\n        let newTask = new Task(title, dueDate, description);\r\n        this.tasks.push(newTask);\r\n    }\r\n}\r\n;\r\nclass Task {\r\n    constructor(title, dueDate, description) {\r\n        this.title = title;\r\n        this.dueDate = dueDate;\r\n        this.description = description;\r\n    }\r\n}\r\nexports.Task = Task;\r\n;\r\n\n\n//# sourceURL=webpack://todo-list/./src/allProjectsObject.ts?");
 
 /***/ }),
 
@@ -136,17 +136,7 @@ eval("\r\n//Create new Project object when new project is added.\r\n//Probable g
   \**********************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-eval("\r\n//Note\r\n// -cog wheel on tasks header to change amount of rows\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\n// -Add new Projects and Tasks button will always be at bottom/end of list to add new objects\r\n// -Add new projects\r\n// -When you click 'Add new Projects' just turn the 'Add new Projects' button to the new project, and move the add new project button down\r\n// -Add new Tasks within projects\r\n// -When different project is selected, present stored tasks\r\n// -New tasks will act similar, when you click 'Add new Task' button it turns the button into a new task and you can fill in the fields as necessary, also moves add new task button over\r\n// -add a bin button on the tasks in the bottom right to delete the tasks\r\n// -add a bin button the the right of projects to delete them (are you sure warning)\r\n//localStorage Test\r\n// export function catTom()\r\n//     let newCat = 'Phillip'\r\n// localStorage.setItem('myCat', newCat)\r\n// const cat = localStorage.getItem('myCat')\r\n// console.log(cat)\r\n// }\r\n__webpack_require__(/*! ./style.css */ \"./src/style.css\");\r\nconst todoSetup_1 = __webpack_require__(/*! ./todoSetup */ \"./src/todoSetup.ts\");\r\nconst addButtons_1 = __webpack_require__(/*! ./addButtons */ \"./src/addButtons.ts\");\r\nconst uiUpdater_1 = __webpack_require__(/*! ./uiUpdater */ \"./src/uiUpdater.ts\");\r\n(0, todoSetup_1.projectSetup)();\r\n(0, addButtons_1.addProject)();\r\n(0, addButtons_1.addTask)();\r\n(0, uiUpdater_1.loopProjects)();\r\n\n\n//# sourceURL=webpack://todo-list/./src/index.ts?");
-
-/***/ }),
-
-/***/ "./src/projectObject.ts":
-/*!******************************!*\
-  !*** ./src/projectObject.ts ***!
-  \******************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.Project = void 0;\r\nconst taskObject_1 = __webpack_require__(/*! ./taskObject */ \"./src/taskObject.ts\");\r\nclass Project {\r\n    constructor(name, tasks) {\r\n        this.name = name;\r\n        this.tasks = tasks;\r\n    }\r\n    addTask(title, dueDate, description) {\r\n        let newTask = new taskObject_1.Task(title, dueDate, description);\r\n        this.tasks.push(newTask);\r\n    }\r\n}\r\nexports.Project = Project;\r\n;\r\n\n\n//# sourceURL=webpack://todo-list/./src/projectObject.ts?");
+eval("\r\n//Note\r\n// -cog wheel on tasks header to change amount of rows\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\n// -Add new Projects and Tasks button will always be at bottom/end of list to add new objects\r\n// -Add new projects\r\n// -When you click 'Add new Projects' just turn the 'Add new Projects' button to the new project, and move the add new project button down\r\n// -Add new Tasks within projects\r\n// -When different project is selected, present stored tasks\r\n// -New tasks will act similar, when you click 'Add new Task' button it turns the button into a new task and you can fill in the fields as necessary, also moves add new task button over\r\n// -add a bin button on the tasks in the bottom right to delete the tasks\r\n// -add a bin button the the right of projects to delete them (are you sure warning)\r\n//localStorage Test\r\n// export function catTom()\r\n//     let newCat = 'Phillip'\r\n// localStorage.setItem('myCat', newCat)\r\n// const cat = localStorage.getItem('myCat')\r\n// console.log(cat)\r\n// }\r\n__webpack_require__(/*! ./style.css */ \"./src/style.css\");\r\nconst todoSetup_1 = __webpack_require__(/*! ./todoSetup */ \"./src/todoSetup.ts\");\r\nconst uiUpdater_1 = __webpack_require__(/*! ./uiUpdater */ \"./src/uiUpdater.ts\");\r\n(0, todoSetup_1.projectSetup)();\r\n(0, uiUpdater_1.loopProjects)();\r\n\n\n//# sourceURL=webpack://todo-list/./src/index.ts?");
 
 /***/ }),
 
@@ -160,23 +150,13 @@ eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\n
 
 /***/ }),
 
-/***/ "./src/taskObject.ts":
-/*!***************************!*\
-  !*** ./src/taskObject.ts ***!
-  \***************************/
-/***/ ((__unused_webpack_module, exports) => {
-
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.Task = void 0;\r\nclass Task {\r\n    constructor(title, dueDate, description) {\r\n        this.title = title;\r\n        this.dueDate = dueDate;\r\n        this.description = description;\r\n    }\r\n}\r\nexports.Task = Task;\r\n;\r\n\n\n//# sourceURL=webpack://todo-list/./src/taskObject.ts?");
-
-/***/ }),
-
 /***/ "./src/todoSetup.ts":
 /*!**************************!*\
   !*** ./src/todoSetup.ts ***!
   \**************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.projectSetup = exports.projectsSetup = void 0;\r\nconst allProjectsObject_1 = __webpack_require__(/*! ./allProjectsObject */ \"./src/allProjectsObject.ts\");\r\nexports.projectsSetup = new allProjectsObject_1.AllProjects([]);\r\nfunction projectSetup() {\r\n    exports.projectsSetup.addProject('Project 1');\r\n    exports.projectsSetup.logProjects();\r\n}\r\nexports.projectSetup = projectSetup;\r\n\n\n//# sourceURL=webpack://todo-list/./src/todoSetup.ts?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.projectSetup = exports.projectsSetup = void 0;\r\nconst addButtons_1 = __webpack_require__(/*! ./addButtons */ \"./src/addButtons.ts\");\r\nconst allProjectsObject_1 = __webpack_require__(/*! ./allProjectsObject */ \"./src/allProjectsObject.ts\");\r\nexports.projectsSetup = new allProjectsObject_1.AllProjects([]);\r\nfunction projectSetup() {\r\n    exports.projectsSetup.addProject('Project 1');\r\n    (0, addButtons_1.addProject)();\r\n    (0, addButtons_1.addTask)();\r\n}\r\nexports.projectSetup = projectSetup;\r\n\n\n//# sourceURL=webpack://todo-list/./src/todoSetup.ts?");
 
 /***/ }),
 
