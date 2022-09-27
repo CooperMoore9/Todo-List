@@ -23,7 +23,9 @@
 import './style.css';
 import { AllProjects } from './allProjectsObject';
 import {projectSetup} from './todoSetup'
+import { getLocalStorage } from './localStorage';
 
 export let projectsSetup = new AllProjects([])
 
+getLocalStorage()
 projectSetup();

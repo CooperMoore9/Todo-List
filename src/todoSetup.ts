@@ -5,9 +5,9 @@ import { loopProjects } from './uiUpdater';
 
 export function projectSetup() {
 
-    projectsSetup.addProject('Project 1')
+    // projectsSetup.addProject('Project 1')
 
     addProject();
     addTask();
-    loopProjects();
+    // loopProjects();
 }

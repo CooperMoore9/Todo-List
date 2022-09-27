@@ -1,15 +1,25 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createProject = exports.localProjectStorage = void 0;
+exports.getLocalStorage = exports.localProjectStorage = void 0;
 const _1 = require(".");
 function localProjectStorage() {
     localStorage.setItem('allProjects', JSON.stringify(_1.projectsSetup));
-    let storedProjects = localStorage.getItem('allProjects');
-    let test = JSON.parse(storedProjects);
-    console.log(test);
+    // console.log(typeof(parseProjects))
+    // console.log(parseProjects)
 }
 exports.localProjectStorage = localProjectStorage;
-function createProject(name) {
-    _1.projectsSetup.addProject(name);
+function getLocalStorage() {
+    let storedProjects = localStorage.getItem('allProjects');
+    console.log(storedProjects);
+    if (!storedProjects) {
+        return;
+    }
+    let parseProjects = JSON.parse(storedProjects);
+    parseProjects.projects.forEach((project) => {
+        if (!project.name) {
+            _1.projectsSetup.addProject(project.name);
+        }
+        console.log(project);
+    });
 }
-exports.createProject = createProject;
+exports.getLocalStorage = getLocalStorage;

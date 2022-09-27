@@ -1,9 +1,8 @@
 import { projectsSetup } from '.';
-import { createProject } from './localStorage';
 import {currentProject, loopProjects} from './uiUpdater'
 
 
-export let DynamicProjectNumber = 1
+export let DynamicProjectNumber = 0
 
 let projectAddButton = document.querySelector('.addProject') as Element;
 let taskAddButton = document.querySelector('.addTask') as Element
@@ -14,7 +13,7 @@ export function addProject(){
 
 //Quarantine
     projectAddButton.addEventListener('click', () => {
-        createProject(`Project ${DynamicProjectNumber+=1}`);
+        projectsSetup.addProject(`Project ${DynamicProjectNumber+=1}`)
         loopProjects();
     })
 //Quarantine

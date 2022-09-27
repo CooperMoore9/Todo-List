@@ -35,7 +35,7 @@ interface ProjectInterface {
     tasks: TaskInterface[]
 }
 
-class Project implements ProjectInterface {
+export class Project implements ProjectInterface {
     
     name: string
     tasks: TaskInterface[]
