@@ -24,8 +24,10 @@ import './style.css';
 import { AllProjects } from './allProjectsObject';
 import {projectSetup} from './todoSetup'
 import { getLocalStorage } from './localStorage';
+import { loopProjects } from './uiUpdater';
 
 export let projectsSetup = new AllProjects([])
 
 getLocalStorage()
 projectSetup();
+loopProjects()

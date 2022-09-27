@@ -1,8 +1,12 @@
 import { projectsSetup } from '.';
+import { numberOfProjects } from './localStorage';
 import {currentProject, loopProjects} from './uiUpdater'
 
+let DynamicProjectNumber:number = 0
 
-export let DynamicProjectNumber = 0
+export function fixDPN () {
+    DynamicProjectNumber = numberOfProjects
+}
 
 let projectAddButton = document.querySelector('.addProject') as Element;
 let taskAddButton = document.querySelector('.addTask') as Element

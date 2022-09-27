@@ -24,11 +24,7 @@ export function loopProjects() {
             console.log(project)
         })
     })
-    if(localStorage !== null){
     localProjectStorage()
-    }else {
-        return
-    }
 }
 
 function loopTasks() {

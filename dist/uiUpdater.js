@@ -21,12 +21,7 @@ function loopProjects() {
             console.log(project);
         });
     });
-    if (localStorage !== null) {
-        (0, localStorage_1.localProjectStorage)();
-    }
-    else {
-        return;
-    }
+    (0, localStorage_1.localProjectStorage)();
 }
 exports.loopProjects = loopProjects;
 function loopTasks() {
