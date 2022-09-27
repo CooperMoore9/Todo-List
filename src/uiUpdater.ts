@@ -1,5 +1,5 @@
 import { projectsSetup } from ".";
-import { localProjectStorage } from "./storageSetup";
+import { localProjectStorage } from "./localStorage";
 
 export let projectAddButton = document.querySelector('.addProject') as Element;
 export let currentProject = 'Project 1'

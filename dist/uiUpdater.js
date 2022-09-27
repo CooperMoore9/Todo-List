@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.loopProjects = exports.currentProject = exports.projectAddButton = void 0;
 const _1 = require(".");
-const storageSetup_1 = require("./storageSetup");
+const localStorage_1 = require("./localStorage");
 exports.projectAddButton = document.querySelector('.addProject');
 exports.currentProject = 'Project 1';
 let projectList = document.querySelector('.projects');
@@ -22,7 +22,7 @@ function loopProjects() {
         });
     });
     if (localStorage !== null) {
-        (0, storageSetup_1.localProjectStorage)();
+        (0, localStorage_1.localProjectStorage)();
     }
     else {
         return;

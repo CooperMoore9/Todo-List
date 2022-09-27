@@ -21,7 +21,5 @@ exports.projectsSetup = void 0;
 require("./style.css");
 const allProjectsObject_1 = require("./allProjectsObject");
 const todoSetup_1 = require("./todoSetup");
-const uiUpdater_1 = require("./uiUpdater");
 exports.projectsSetup = new allProjectsObject_1.AllProjects([]);
 (0, todoSetup_1.projectSetup)();
-(0, uiUpdater_1.loopProjects)();

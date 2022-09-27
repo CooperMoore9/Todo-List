@@ -1,5 +1,5 @@
 import { projectsSetup } from '.';
-import { createProject } from './storageSetup';
+import { createProject } from './localStorage';
 import {currentProject, loopProjects} from './uiUpdater'
 
 

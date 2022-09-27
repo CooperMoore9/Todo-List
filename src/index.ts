@@ -23,10 +23,7 @@
 import './style.css';
 import { AllProjects } from './allProjectsObject';
 import {projectSetup} from './todoSetup'
-import {loopProjects} from './uiUpdater'
-
 
 export let projectsSetup = new AllProjects([])
 
 projectSetup();
-loopProjects();
