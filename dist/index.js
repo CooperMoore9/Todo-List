@@ -2,6 +2,7 @@
 //Note
 // -cog wheel on tasks header to change amount of rows
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.projectsSetup = void 0;
 // -Add new Projects and Tasks button will always be at bottom/end of list to add new objects
 // -Add new projects
 // -When you click 'Add new Projects' just turn the 'Add new Projects' button to the new project, and move the add new project button down
@@ -18,7 +19,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // console.log(cat)
 // }
 require("./style.css");
+const allProjectsObject_1 = require("./allProjectsObject");
 const todoSetup_1 = require("./todoSetup");
 const uiUpdater_1 = require("./uiUpdater");
+exports.projectsSetup = new allProjectsObject_1.AllProjects([]);
 (0, todoSetup_1.projectSetup)();
 (0, uiUpdater_1.loopProjects)();

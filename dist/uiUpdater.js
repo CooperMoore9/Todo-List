@@ -1,15 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.loopProjects = exports.currentProject = exports.projectAddButton = void 0;
+const _1 = require(".");
 const storageSetup_1 = require("./storageSetup");
-const todoSetup_1 = require("./todoSetup");
 exports.projectAddButton = document.querySelector('.addProject');
-let projectList = document.querySelector('.projects');
 exports.currentProject = 'Project 1';
+let projectList = document.querySelector('.projects');
 const taskHeader = document.querySelector('.taskHeader');
 function loopProjects() {
     projectList.innerHTML = '';
-    todoSetup_1.projectsSetup.projects.forEach(project => {
+    _1.projectsSetup.projects.forEach(project => {
         let div = document.createElement('button');
         div.classList.add('project');
         div.classList.add(`${project.name.replace(/\s/g, '').toLowerCase()}`);
@@ -31,6 +31,7 @@ function loopProjects() {
 exports.loopProjects = loopProjects;
 function loopTasks() {
 }
+// test stuff
 // project.addTask('name', newDate, 'desc')
 // console.log(projectList)
 // console.log(projectAddButton)

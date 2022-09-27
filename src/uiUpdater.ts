@@ -1,8 +1,10 @@
+import { projectsSetup } from ".";
 import { localProjectStorage } from "./storageSetup";
-import {projectsSetup } from "./todoSetup";
+
 export let projectAddButton = document.querySelector('.addProject') as Element;
-let projectList = document.querySelector('.projects') as Element;
 export let currentProject = 'Project 1'
+
+let projectList = document.querySelector('.projects') as Element;
 const taskHeader = document.querySelector('.taskHeader') as Element
 
 
@@ -33,6 +35,7 @@ function loopTasks() {
     
 }
 
+// test stuff
     // project.addTask('name', newDate, 'desc')
     
     // console.log(projectList)
