@@ -11,14 +11,33 @@ function loopProjects() {
     projectList.innerHTML = '';
     _1.projectsSetup.projects.forEach(project => {
         let div = document.createElement('button');
-        div.classList.add('project');
+        let spacer = document.createElement('div');
+        let displayText = document.createElement('div');
+        let deleteButton = document.createElement('button');
+        div.classList.add('project', 'justify-around');
         div.classList.add(`${project.name.replace(/\s/g, '').toLowerCase()}`);
-        div.textContent = project.name;
+        spacer.classList.add('w-7');
+        displayText.classList.add('w-9/12');
+        deleteButton.classList.add('w-7');
+        deleteButton.textContent = 'X';
+        displayText.textContent = project.name;
         projectList.appendChild(div);
+        div.appendChild(spacer);
+        div.appendChild(displayText);
+        div.appendChild(deleteButton);
         div.addEventListener('click', () => {
             exports.currentProject = project.name;
             taskHeader.textContent = `${exports.currentProject} Tasks`;
-            console.log(project);
+            console.log(project, 'project');
+        });
+        deleteButton.addEventListener('click', () => {
+            _1.projectsSetup.projects.forEach((project) => {
+                if (exports.currentProject === project.name) {
+                    console.log(_1.projectsSetup.projects.indexOf(project), 'indexof');
+                    console.log(`delete ${project}`);
+                    _1.projectsSetup.projects.splice(_1.projectsSetup.projects.indexOf(project), 1);
+                }
+            });
         });
     });
     (0, localStorage_1.localProjectStorage)();
