@@ -31,20 +31,17 @@ function loopProjects() {
             taskHeader.textContent = `${exports.currentProject} Tasks`;
             console.log(project, 'project');
         });
-        deleteButton.addEventListener('click', deleteProject);
+        deleteButton.addEventListener('click', deleteProject.bind(project));
     });
     (0, localStorage_1.localProjectStorage)();
 }
 exports.loopProjects = loopProjects;
 function deleteProject() {
-    _1.projectsSetup.projects.forEach((project) => {
-        if (exports.currentProject === project.name) {
-            _1.projectsSetup.projects.splice(_1.projectsSetup.projects.indexOf(project), 1);
-            loopProjects();
-            return;
-        }
-    });
+    _1.projectsSetup.projects.splice(_1.projectsSetup.projects.indexOf(this), 1);
+    loopProjects();
+    return;
 }
+;
 function loopTasks() {
 }
 exports.loopTasks = loopTasks;

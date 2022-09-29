@@ -41,22 +41,18 @@ export function loopProjects() {
             console.log(project, 'project')
         })
 
-        deleteButton.addEventListener('click', deleteProject)
+        deleteButton.addEventListener('click', deleteProject.bind(project as Project))
         
     })
     localProjectStorage()
 }
 
 function deleteProject() {
-    projectsSetup.projects.forEach((project: Project) => {
-        if(currentProject === project.name){
-            projectsSetup.projects.splice(projectsSetup.projects.indexOf(project), 1)
+            projectsSetup.projects.splice(projectsSetup.projects.indexOf(this), 1)
             loopProjects()
             return
-        }
-    });
+    };
 
-}
 
 export function loopTasks() {
 }
