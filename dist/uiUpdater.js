@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loopProjects = exports.currentProject = exports.projectAddButton = void 0;
+exports.loopTasks = exports.loopProjects = exports.currentProject = exports.projectAddButton = void 0;
 const _1 = require(".");
 const localStorage_1 = require("./localStorage");
 exports.projectAddButton = document.querySelector('.addProject');
 exports.currentProject = 'Project 1';
 let projectList = document.querySelector('.projects');
+let projectTasks = document.querySelector('.projectTasks');
 const taskHeader = document.querySelector('.taskHeader');
 function loopProjects() {
     projectList.innerHTML = '';
@@ -30,26 +31,20 @@ function loopProjects() {
             taskHeader.textContent = `${exports.currentProject} Tasks`;
             console.log(project, 'project');
         });
-        deleteButton.addEventListener('click', () => {
-            _1.projectsSetup.projects.forEach((project) => {
-                if (exports.currentProject === project.name) {
-                    console.log(_1.projectsSetup.projects.indexOf(project), 'indexof');
-                    console.log(`delete ${project}`);
-                    _1.projectsSetup.projects.splice(_1.projectsSetup.projects.indexOf(project), 1);
-                }
-            });
-        });
+        deleteButton.addEventListener('click', deleteProject);
     });
     (0, localStorage_1.localProjectStorage)();
 }
 exports.loopProjects = loopProjects;
+function deleteProject() {
+    _1.projectsSetup.projects.forEach((project) => {
+        if (exports.currentProject === project.name) {
+            _1.projectsSetup.projects.splice(_1.projectsSetup.projects.indexOf(project), 1);
+            loopProjects();
+            return;
+        }
+    });
+}
 function loopTasks() {
 }
-// test stuff
-// project.addTask('name', newDate, 'desc')
-// console.log(projectList)
-// console.log(projectAddButton)
-// if(project.name === 'project1'){
-//     project.addTask('bruh', newDate , 'desc')
-//     console.log(project)
-// }
+exports.loopTasks = loopTasks;

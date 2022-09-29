@@ -1,6 +1,6 @@
 import { projectsSetup } from '.';
 import { numberOfProjects } from './localStorage';
-import {currentProject, loopProjects} from './uiUpdater'
+import {currentProject, loopProjects, loopTasks} from './uiUpdater'
 
 let DynamicProjectNumber:number = 0
 
@@ -33,6 +33,7 @@ export function addTask(){
         projectsSetup.projects.forEach(project => {
             if(project.name === currentProject){
                 project.addTask('bruh', newDate , 'desc')
+                loopTasks()
             }
         })    
     })

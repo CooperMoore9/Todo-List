@@ -1,12 +1,13 @@
 import { projectsSetup } from ".";
-import { Project } from "./allProjectsObject";
+import { Project, Task } from "./allProjectsObject";
 import { localProjectStorage } from "./localStorage";
 
 export let projectAddButton = document.querySelector('.addProject') as Element;
 export let currentProject = 'Project 1'
 
 let projectList = document.querySelector('.projects') as Element;
-const taskHeader = document.querySelector('.taskHeader') as Element
+let projectTasks = document.querySelector('.projectTasks') as Element;
+const taskHeader = document.querySelector('.taskHeader') as Element;
 
 
 
@@ -40,32 +41,22 @@ export function loopProjects() {
             console.log(project, 'project')
         })
 
-        deleteButton.addEventListener('click', () => {
-            projectsSetup.projects.forEach((project: Project) => {
-                if(currentProject === project.name){
-                    console.log(projectsSetup.projects.indexOf(project), 'indexof')
-                    console.log(`delete ${project}`)
-                    projectsSetup.projects.splice(projectsSetup.projects.indexOf(project),1)
-                }
-            });
-        })
+        deleteButton.addEventListener('click', deleteProject)
         
     })
     localProjectStorage()
 }
 
-function loopTasks() {
-    
+function deleteProject() {
+    projectsSetup.projects.forEach((project: Project) => {
+        if(currentProject === project.name){
+            projectsSetup.projects.splice(projectsSetup.projects.indexOf(project), 1)
+            loopProjects()
+            return
+        }
+    });
+
 }
 
-// test stuff
-    // project.addTask('name', newDate, 'desc')
-    
-    // console.log(projectList)
-    // console.log(projectAddButton)
-
-
-        // if(project.name === 'project1'){
-        //     project.addTask('bruh', newDate , 'desc')
-        //     console.log(project)
-        // }
+export function loopTasks() {
+}

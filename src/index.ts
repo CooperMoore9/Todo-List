@@ -28,6 +28,6 @@ import { loopProjects } from './uiUpdater';
 
 export let projectsSetup = new AllProjects([])
 
-getLocalStorage()
+getLocalStorage();
 projectSetup();
-loopProjects()
+loopProjects();

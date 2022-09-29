@@ -27,6 +27,7 @@ function addTask() {
         _1.projectsSetup.projects.forEach(project => {
             if (project.name === uiUpdater_1.currentProject) {
                 project.addTask('bruh', newDate, 'desc');
+                (0, uiUpdater_1.loopTasks)();
             }
         });
     });
