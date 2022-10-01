@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loopTasks = exports.loopProjects = exports.currentProject = exports.projectAddButton = void 0;
+exports.loopTasks = exports.refreshTasks = exports.loopProjects = exports.currentProject = exports.projectAddButton = void 0;
 const _1 = require(".");
+const addButtons_1 = require("./addButtons");
 const localStorage_1 = require("./localStorage");
 exports.projectAddButton = document.querySelector('.addProject');
 exports.currentProject = 'Project 1';
@@ -27,21 +28,35 @@ function loopProjects() {
         div.appendChild(displayText);
         div.appendChild(deleteButton);
         div.addEventListener('click', () => {
+            loopTasks(project);
             exports.currentProject = project.name;
             taskHeader.textContent = `${exports.currentProject} Tasks`;
             console.log(project, 'project');
         });
-        deleteButton.addEventListener('click', deleteProject.bind(project));
+        deleteButton.addEventListener('click', () => deleteProject(project));
     });
     (0, localStorage_1.localProjectStorage)();
 }
 exports.loopProjects = loopProjects;
-function deleteProject() {
-    _1.projectsSetup.projects.splice(_1.projectsSetup.projects.indexOf(this), 1);
+function deleteProject(project) {
+    _1.projectsSetup.projects.splice(_1.projectsSetup.projects.indexOf(project), 1);
     loopProjects();
-    return;
 }
 ;
-function loopTasks() {
+function refreshTasks() {
+    const deleteTasks = document.querySelectorAll('.task');
+    deleteTasks.forEach((div) => {
+        div.remove();
+    });
+}
+exports.refreshTasks = refreshTasks;
+function loopTasks(selectedProject) {
+    refreshTasks();
+    selectedProject.tasks.forEach(task => {
+        let div = document.createElement('div');
+        div.classList.add('task');
+        projectTasks.insertBefore(div, addButtons_1.taskAddButton);
+    });
 }
 exports.loopTasks = loopTasks;
+;

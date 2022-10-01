@@ -105,6 +105,23 @@ html {
     outline: inherit;
   }
 
+  .addTask {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    align-items: center;
+    border-style: solid;
+    border-width: 0.2em;
+    border-color: black;
+    height: 10em;
+    width: 10em;
+    overflow: auto;
+    border-radius: 2em;
+    padding: 0.3em;
+    gap: 6px;
+  }
+
   .project.addProject:hover, .task.addTask:hover {
     background-color: lightgrey;
   }

@@ -5,28 +5,36 @@
 //When tasks are added, create task Object, and store in current Project Object
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Task = exports.Project = exports.AllProjects = void 0;
+;
 class AllProjects {
     constructor(projects) {
         this.projects = projects;
     }
+    ;
     addProject(name) {
         let newProject = new Project(name, []);
         this.projects.push(newProject);
     }
+    ;
     logProjects() {
         console.log(this);
     }
+    ;
 }
 exports.AllProjects = AllProjects;
+;
+;
 class Project {
     constructor(name, tasks) {
         this.name = name;
         this.tasks = tasks;
     }
+    ;
     addTask(title, dueDate, description) {
         let newTask = new Task(title, dueDate, description);
         this.tasks.push(newTask);
     }
+    ;
 }
 exports.Project = Project;
 ;
@@ -36,6 +44,7 @@ class Task {
         this.dueDate = dueDate;
         this.description = description;
     }
+    ;
 }
 exports.Task = Task;
 ;

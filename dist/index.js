@@ -22,8 +22,6 @@ require("./style.css");
 const allProjectsObject_1 = require("./allProjectsObject");
 const todoSetup_1 = require("./todoSetup");
 const localStorage_1 = require("./localStorage");
-const uiUpdater_1 = require("./uiUpdater");
 exports.projectsSetup = new allProjectsObject_1.AllProjects([]);
 (0, localStorage_1.getLocalStorage)();
 (0, todoSetup_1.projectSetup)();
-(0, uiUpdater_1.loopProjects)();
