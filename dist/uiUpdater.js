@@ -31,7 +31,6 @@ function loopProjects() {
             loopTasks(project);
             exports.currentProject = project.name;
             taskHeader.textContent = `${exports.currentProject} Tasks`;
-            console.log(project, 'project');
         });
         deleteButton.addEventListener('click', () => deleteProject(project));
     });
@@ -54,9 +53,19 @@ function loopTasks(selectedProject) {
     refreshTasks();
     selectedProject.tasks.forEach(task => {
         let div = document.createElement('div');
+        let taskTitle = document.createElement('div');
+        let taskDueDate = document.createElement('div');
+        let taskDescription = document.createElement('div');
+        div.appendChild(taskTitle);
+        div.appendChild(taskDueDate);
+        div.appendChild(taskDescription);
+        taskTitle.textContent = task.title;
+        taskDueDate.textContent = '10/10/2022';
+        taskDescription.textContent = task.description;
         div.classList.add('task');
         projectTasks.insertBefore(div, addButtons_1.taskAddButton);
     });
+    (0, localStorage_1.localProjectStorage)();
 }
 exports.loopTasks = loopTasks;
 ;

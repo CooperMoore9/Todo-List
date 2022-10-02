@@ -1,7 +1,6 @@
-import { areIntervalsOverlappingWithOptions } from "date-fns/fp";
 import { projectsSetup } from ".";
 import { taskAddButton } from "./addButtons";
-import { AllProjects, Project, Task } from "./allProjectsObject";
+import { Project } from "./allProjectsObject";
 import { localProjectStorage } from "./localStorage";
 
 export let projectAddButton = document.querySelector('.addProject') as Element;
@@ -40,7 +39,6 @@ export function loopProjects() {
             loopTasks(project);
             currentProject = project.name;
             taskHeader.textContent = `${currentProject} Tasks`;
-            console.log(project, 'project');
         })
 
         deleteButton.addEventListener('click', () => deleteProject(project));
@@ -62,15 +60,25 @@ export function refreshTasks() {
     })
 }
 
-
 export function loopTasks(selectedProject: Project) {
     refreshTasks()
-
         selectedProject.tasks.forEach(task => {
             let div = document.createElement('div')
+            let taskTitle = document.createElement('div')
+            let taskDueDate = document.createElement('div')
+            let taskDescription = document.createElement('div')
+
+            div.appendChild(taskTitle)
+            div.appendChild(taskDueDate)
+            div.appendChild(taskDescription)
+
+            taskTitle.textContent = task.title
+            taskDueDate.textContent = '10/10/2022'
+            taskDescription.textContent = task.description
 
             div.classList.add('task')
 
             projectTasks.insertBefore(div, taskAddButton)
         })
+        localProjectStorage()
     };

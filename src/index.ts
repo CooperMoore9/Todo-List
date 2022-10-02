@@ -29,4 +29,3 @@ export let projectsSetup = new AllProjects([]);
 
 getLocalStorage();
 projectSetup();
-

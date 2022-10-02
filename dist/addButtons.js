@@ -12,7 +12,7 @@ exports.fixDPN = fixDPN;
 ;
 let projectAddButton = document.querySelector('.addProject');
 exports.taskAddButton = document.querySelector('.addTask');
-const newDate = new Date(1995, 6, 2);
+const newDate = new Date(2000, 6, 2);
 function addProject() {
     //Quarantine
     projectAddButton.addEventListener('click', () => {

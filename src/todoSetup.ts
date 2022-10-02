@@ -1,5 +1,5 @@
 import { addProject, addTask } from './addButtons';
-import { loopProjects } from './uiUpdater';
+import { loopProjects, loopTasks } from './uiUpdater';
 
 
 export function projectSetup() {
