@@ -1,6 +1,5 @@
 import { parse } from "date-fns";
 import { projectsSetup } from ".";
-import { fixDPN } from "./addButtons";
 import { Project, Task, TaskInterface } from "./allProjectsObject";
 
 export let numberOfProjects:number = 0;
@@ -21,7 +20,6 @@ export function getLocalStorage() {
         populateTasks(projectsSetup.projects[projectsSetup.projects.length-1], project.tasks );
 
         numberOfProjects += 1;
-        fixDPN();
     });
 };
 

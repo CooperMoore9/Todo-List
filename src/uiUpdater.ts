@@ -4,7 +4,9 @@ import { Project } from "./allProjectsObject";
 import { localProjectStorage } from "./localStorage";
 
 export let projectAddButton = document.querySelector('.addProject') as Element;
+
 export let currentProject = 'Project 1';
+
 
 let projectList = document.querySelector('.projects') as Element;
 let projectTasks = document.querySelector('.projectTasks') as Element;
