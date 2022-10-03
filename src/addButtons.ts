@@ -13,21 +13,14 @@ export let taskAddButton = document.querySelector('.addTask') as Element;
 const newDate = new Date(2000, 6, 2);
 
 export function addProject(){
-
-//Quarantine
     projectAddButton.addEventListener('click', () => {
         projectsSetup.addProject(`Project ${DynamicProjectNumber+=1}`);
         loopProjects();
     })
-//Quarantine
-
 };
 
 
 export function addTask(){
-
-
-//Quarantine
     taskAddButton.addEventListener('click', () => {    
         projectsSetup.projects.forEach(project => {
             if(project.name === currentProject){
@@ -36,7 +29,4 @@ export function addTask(){
             };
         });
     });
-//Quarantine
-
-
 }

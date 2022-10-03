@@ -14,15 +14,14 @@ export function loopProjects() {
     refreshProjects()
     projectsSetup.projects.forEach(project => {
 
-        let div = document.createElement('button');
+        let div = document.createElement('div');
         let spacer = document.createElement('div');
-        let displayText = document.createElement('div');
+        let displayText = document.createElement('button');
         let deleteButton = document.createElement('button');
 
         div.classList.add('project', 'justify-around');
         div.classList.add(`${project.name.replace(/\s/g, '').toLowerCase()}`);
-        spacer.classList.add('w-7');
-        displayText.classList.add('w-9/12');
+        displayText.classList.add('w-full', 'pl-7');
         deleteButton.classList.add('w-7');
 
         deleteButton.textContent = 'X';
@@ -33,10 +32,10 @@ export function loopProjects() {
         div.appendChild(displayText);
         div.appendChild(deleteButton);
 
-        div.addEventListener('click', () => {
-            loopTasks(project);
+        displayText.addEventListener('click', () => {
             currentProject = project.name;
             taskHeader.textContent = `${currentProject} Tasks`;
+            loopTasks(project);
         })
 
         deleteButton.addEventListener('click', () => deleteProject(project));
@@ -85,6 +84,12 @@ export function loopTasks(selectedProject: Project) {
 
     function deleteProject(project: Project) {
         projectsSetup.projects.splice(projectsSetup.projects.indexOf(project), 1);
-        currentProject = 'Project 1'
+        if(projectsSetup.projects[0]){
+            currentProject = projectsSetup.projects[0].name;
+            taskHeader.textContent = `${currentProject} Tasks`;
+            loopTasks(projectsSetup.projects[0]);
+        }else{
+            refreshTasks()
+        }
         loopProjects();
     };

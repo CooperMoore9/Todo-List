@@ -12,14 +12,13 @@ const taskHeader = document.querySelector('.taskHeader');
 function loopProjects() {
     refreshProjects();
     _1.projectsSetup.projects.forEach(project => {
-        let div = document.createElement('button');
+        let div = document.createElement('div');
         let spacer = document.createElement('div');
-        let displayText = document.createElement('div');
+        let displayText = document.createElement('button');
         let deleteButton = document.createElement('button');
         div.classList.add('project', 'justify-around');
         div.classList.add(`${project.name.replace(/\s/g, '').toLowerCase()}`);
-        spacer.classList.add('w-7');
-        displayText.classList.add('w-9/12');
+        displayText.classList.add('w-full', 'pl-7');
         deleteButton.classList.add('w-7');
         deleteButton.textContent = 'X';
         displayText.textContent = project.name;
@@ -27,10 +26,10 @@ function loopProjects() {
         div.appendChild(spacer);
         div.appendChild(displayText);
         div.appendChild(deleteButton);
-        div.addEventListener('click', () => {
-            loopTasks(project);
+        displayText.addEventListener('click', () => {
             exports.currentProject = project.name;
             taskHeader.textContent = `${exports.currentProject} Tasks`;
+            loopTasks(project);
         });
         deleteButton.addEventListener('click', () => deleteProject(project));
     });
@@ -73,7 +72,14 @@ function refreshTasks() {
 exports.refreshTasks = refreshTasks;
 function deleteProject(project) {
     _1.projectsSetup.projects.splice(_1.projectsSetup.projects.indexOf(project), 1);
-    exports.currentProject = 'Project 1';
+    if (_1.projectsSetup.projects[0]) {
+        exports.currentProject = _1.projectsSetup.projects[0].name;
+        taskHeader.textContent = `${exports.currentProject} Tasks`;
+        loopTasks(_1.projectsSetup.projects[0]);
+    }
+    else {
+        refreshTasks();
+    }
     loopProjects();
 }
 ;

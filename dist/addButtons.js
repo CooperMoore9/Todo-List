@@ -14,17 +14,14 @@ let projectAddButton = document.querySelector('.addProject');
 exports.taskAddButton = document.querySelector('.addTask');
 const newDate = new Date(2000, 6, 2);
 function addProject() {
-    //Quarantine
     projectAddButton.addEventListener('click', () => {
         _1.projectsSetup.addProject(`Project ${DynamicProjectNumber += 1}`);
         (0, uiUpdater_1.loopProjects)();
     });
-    //Quarantine
 }
 exports.addProject = addProject;
 ;
 function addTask() {
-    //Quarantine
     exports.taskAddButton.addEventListener('click', () => {
         _1.projectsSetup.projects.forEach(project => {
             if (project.name === uiUpdater_1.currentProject) {
@@ -34,6 +31,5 @@ function addTask() {
             ;
         });
     });
-    //Quarantine
 }
 exports.addTask = addTask;
