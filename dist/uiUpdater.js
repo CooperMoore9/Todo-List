@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loopTasks = exports.refreshTasks = exports.loopProjects = exports.currentProject = exports.projectAddButton = void 0;
+exports.refreshTasks = exports.refreshProjects = exports.loopTasks = exports.loopProjects = exports.currentProject = exports.projectAddButton = void 0;
 const _1 = require(".");
 const addButtons_1 = require("./addButtons");
 const localStorage_1 = require("./localStorage");
@@ -10,7 +10,7 @@ let projectList = document.querySelector('.projects');
 let projectTasks = document.querySelector('.projectTasks');
 const taskHeader = document.querySelector('.taskHeader');
 function loopProjects() {
-    projectList.innerHTML = '';
+    refreshProjects();
     _1.projectsSetup.projects.forEach(project => {
         let div = document.createElement('button');
         let spacer = document.createElement('div');
@@ -23,7 +23,7 @@ function loopProjects() {
         deleteButton.classList.add('w-7');
         deleteButton.textContent = 'X';
         displayText.textContent = project.name;
-        projectList.appendChild(div);
+        projectList.insertBefore(div, exports.projectAddButton);
         div.appendChild(spacer);
         div.appendChild(displayText);
         div.appendChild(deleteButton);
@@ -37,18 +37,6 @@ function loopProjects() {
     (0, localStorage_1.localProjectStorage)();
 }
 exports.loopProjects = loopProjects;
-function deleteProject(project) {
-    _1.projectsSetup.projects.splice(_1.projectsSetup.projects.indexOf(project), 1);
-    loopProjects();
-}
-;
-function refreshTasks() {
-    const deleteTasks = document.querySelectorAll('.task');
-    deleteTasks.forEach((div) => {
-        div.remove();
-    });
-}
-exports.refreshTasks = refreshTasks;
 function loopTasks(selectedProject) {
     refreshTasks();
     selectedProject.tasks.forEach(task => {
@@ -68,4 +56,24 @@ function loopTasks(selectedProject) {
     (0, localStorage_1.localProjectStorage)();
 }
 exports.loopTasks = loopTasks;
+;
+function refreshProjects() {
+    const deleteProjects = document.querySelectorAll('.project');
+    deleteProjects.forEach((div) => {
+        div.remove();
+    });
+}
+exports.refreshProjects = refreshProjects;
+function refreshTasks() {
+    const deleteTasks = document.querySelectorAll('.task');
+    deleteTasks.forEach((div) => {
+        div.remove();
+    });
+}
+exports.refreshTasks = refreshTasks;
+function deleteProject(project) {
+    _1.projectsSetup.projects.splice(_1.projectsSetup.projects.indexOf(project), 1);
+    exports.currentProject = 'Project 1';
+    loopProjects();
+}
 ;

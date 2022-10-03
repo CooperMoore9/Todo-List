@@ -10,10 +10,8 @@ let projectList = document.querySelector('.projects') as Element;
 let projectTasks = document.querySelector('.projectTasks') as Element;
 const taskHeader = document.querySelector('.taskHeader') as Element;
 
-
-
 export function loopProjects() {
-    projectList.innerHTML = '';
+    refreshProjects()
     projectsSetup.projects.forEach(project => {
 
         let div = document.createElement('button');
@@ -30,7 +28,7 @@ export function loopProjects() {
         deleteButton.textContent = 'X';
         displayText.textContent = project.name;
 
-        projectList.appendChild(div);
+        projectList.insertBefore(div, projectAddButton)
         div.appendChild(spacer);
         div.appendChild(displayText);
         div.appendChild(deleteButton);
@@ -47,18 +45,6 @@ export function loopProjects() {
     localProjectStorage();
 }
 
-function deleteProject(project: Project) {
-        projectsSetup.projects.splice(projectsSetup.projects.indexOf(project), 1);
-        loopProjects();
-    };
-
-    
-export function refreshTasks() {
-    const deleteTasks = document.querySelectorAll('.task');
-    deleteTasks.forEach((div) => {
-        div.remove();
-    })
-}
 
 export function loopTasks(selectedProject: Project) {
     refreshTasks()
@@ -81,4 +67,24 @@ export function loopTasks(selectedProject: Project) {
             projectTasks.insertBefore(div, taskAddButton)
         })
         localProjectStorage()
+    };
+
+    export function refreshProjects() {
+        const deleteProjects = document.querySelectorAll('.project');
+        deleteProjects.forEach((div) => {
+            div.remove();
+        })
+    }
+
+    export function refreshTasks() {
+        const deleteTasks = document.querySelectorAll('.task');
+        deleteTasks.forEach((div) => {
+            div.remove();
+        })
+    }
+
+    function deleteProject(project: Project) {
+        projectsSetup.projects.splice(projectsSetup.projects.indexOf(project), 1);
+        currentProject = 'Project 1'
+        loopProjects();
     };
