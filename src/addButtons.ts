@@ -21,7 +21,9 @@ export function addProject(){
 
 export function addTask(){
     taskAddButton.addEventListener('click', () => {
-        projectsSetup.projects[projectIndex].addTask('bruh', newDate , 'desc')
-        loopTasks(projectsSetup.projects[projectIndex]);
+        if(projectsSetup.projects[0]){
+            projectsSetup.projects[projectIndex].addTask('bruh', newDate , 'desc')
+            loopTasks(projectsSetup.projects[projectIndex]);
+        }else{return}
     });
 }

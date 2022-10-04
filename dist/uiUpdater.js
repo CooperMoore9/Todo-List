@@ -44,14 +44,20 @@ function loopTasks(selectedProject) {
         let taskTitle = document.createElement('div');
         let taskDueDate = document.createElement('div');
         let taskDescription = document.createElement('div');
+        let taskDeleteButton = document.createElement('button');
         div.appendChild(taskTitle);
         div.appendChild(taskDueDate);
         div.appendChild(taskDescription);
+        div.appendChild(taskDeleteButton);
         taskTitle.textContent = task.title;
         taskDueDate.textContent = '10/10/2022';
         taskDescription.textContent = task.description;
+        taskDeleteButton.textContent = 'X';
+        taskDescription.classList.add('h-full');
+        taskDeleteButton.classList.add('w-7', 'ml-36');
         div.classList.add('task');
         projectTasks.insertBefore(div, addButtons_1.taskAddButton);
+        taskDeleteButton.addEventListener('click', () => deleteTask(task));
     });
     (0, localStorage_1.localProjectStorage)();
 }
@@ -84,11 +90,16 @@ function deleteProject(project) {
     loopProjects();
 }
 ;
+function deleteTask(task) {
+    _1.projectsSetup.projects[exports.projectIndex].tasks.splice(_1.projectsSetup.projects[exports.projectIndex].tasks.indexOf(task), 1);
+    loopTasks(_1.projectsSetup.projects[exports.projectIndex]);
+}
+;
 function taskHeaderFix() {
     if (_1.projectsSetup.projects[0]) {
         taskHeader.textContent = `${_1.projectsSetup.projects[0].name} Tasks`;
     }
     else {
-        taskHeader.textContent = 'Project 1';
+        taskHeader.textContent = 'Project 1 Tasks';
     }
 }

@@ -1,6 +1,6 @@
 import { projectsSetup } from ".";
 import { taskAddButton } from "./addButtons";
-import { Project } from "./allProjectsObject";
+import { Project, Task } from "./allProjectsObject";
 import { localProjectStorage } from "./localStorage";
 
 export let projectAddButton = document.querySelector('.addProject') as Element;
@@ -48,24 +48,32 @@ export function loopProjects() {
 export function loopTasks(selectedProject: Project) {
     refreshTasks()
         selectedProject.tasks.forEach(task => {
-            let div = document.createElement('div')
-            let taskTitle = document.createElement('div')
-            let taskDueDate = document.createElement('div')
-            let taskDescription = document.createElement('div')
+            let div = document.createElement('div');
+            let taskTitle = document.createElement('div');
+            let taskDueDate = document.createElement('div');
+            let taskDescription = document.createElement('div');
+            let taskDeleteButton = document.createElement('button');
 
-            div.appendChild(taskTitle)
-            div.appendChild(taskDueDate)
-            div.appendChild(taskDescription)
+            div.appendChild(taskTitle);
+            div.appendChild(taskDueDate);
+            div.appendChild(taskDescription);
+            div.appendChild(taskDeleteButton);
 
-            taskTitle.textContent = task.title
-            taskDueDate.textContent = '10/10/2022'
-            taskDescription.textContent = task.description
+            taskTitle.textContent = task.title;
+            taskDueDate.textContent = '10/10/2022';
+            taskDescription.textContent = task.description;
+            taskDeleteButton.textContent = 'X'
 
-            div.classList.add('task')
+            taskDescription.classList.add('h-full')
+            taskDeleteButton.classList.add('w-7', 'ml-36')
+            div.classList.add('task');
 
-            projectTasks.insertBefore(div, taskAddButton)
+            projectTasks.insertBefore(div, taskAddButton);
+
+            taskDeleteButton.addEventListener('click', () => deleteTask(task))
+
         })
-        localProjectStorage()
+        localProjectStorage();
     };
 
     export function refreshProjects() {
@@ -94,11 +102,16 @@ export function loopTasks(selectedProject: Project) {
         loopProjects();
     };
 
+    function deleteTask(task: Task) {
+        projectsSetup.projects[projectIndex].tasks.splice(projectsSetup.projects[projectIndex].tasks.indexOf(task), 1)
+        loopTasks(projectsSetup.projects[projectIndex])
+    };
 
-function taskHeaderFix() {
-    if(projectsSetup.projects[0]){
-        taskHeader.textContent = `${projectsSetup.projects[0].name} Tasks`;
-    }else {
-        taskHeader.textContent = 'Project 1'
+
+    function taskHeaderFix() {
+        if(projectsSetup.projects[0]){
+            taskHeader.textContent = `${projectsSetup.projects[0].name} Tasks`;
+        }else {
+            taskHeader.textContent = 'Project 1 Tasks'
+        }
     }
-}
