@@ -4,9 +4,7 @@ import { Project } from "./allProjectsObject";
 import { localProjectStorage } from "./localStorage";
 
 export let projectAddButton = document.querySelector('.addProject') as Element;
-
-export let currentProject = 'Project 1';
-
+export let projectIndex = 0;
 
 let projectList = document.querySelector('.projects') as Element;
 let projectTasks = document.querySelector('.projectTasks') as Element;
@@ -14,8 +12,8 @@ const taskHeader = document.querySelector('.taskHeader') as Element;
 
 export function loopProjects() {
     refreshProjects()
+    taskHeaderFix()
     projectsSetup.projects.forEach(project => {
-
         let div = document.createElement('div');
         let spacer = document.createElement('div');
         let displayText = document.createElement('button');
@@ -35,8 +33,8 @@ export function loopProjects() {
         div.appendChild(deleteButton);
 
         displayText.addEventListener('click', () => {
-            currentProject = project.name;
-            taskHeader.textContent = `${currentProject} Tasks`;
+            projectIndex = projectsSetup.projects.indexOf(project)
+            taskHeader.textContent = `${project.name} Tasks`;
             loopTasks(project);
         })
 
@@ -87,11 +85,20 @@ export function loopTasks(selectedProject: Project) {
     function deleteProject(project: Project) {
         projectsSetup.projects.splice(projectsSetup.projects.indexOf(project), 1);
         if(projectsSetup.projects[0]){
-            currentProject = projectsSetup.projects[0].name;
-            taskHeader.textContent = `${currentProject} Tasks`;
+            project.name = projectsSetup.projects[0].name;
+            taskHeader.textContent = `${project.name} Tasks`;
             loopTasks(projectsSetup.projects[0]);
         }else{
             refreshTasks()
         }
         loopProjects();
     };
+
+
+function taskHeaderFix() {
+    if(projectsSetup.projects[0]){
+        taskHeader.textContent = `${projectsSetup.projects[0].name} Tasks`;
+    }else {
+        taskHeader.textContent = 'Project 1'
+    }
+}

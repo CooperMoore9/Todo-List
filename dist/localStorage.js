@@ -1,9 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getLocalStorage = exports.localProjectStorage = exports.numberOfProjects = void 0;
+exports.getLocalStorage = exports.localProjectStorage = void 0;
 const _1 = require(".");
-exports.numberOfProjects = 0;
-const newDate = new Date(2000, 6, 2);
 function localProjectStorage() {
     localStorage.setItem('allProjects', JSON.stringify(_1.projectsSetup));
 }
@@ -19,7 +17,6 @@ function getLocalStorage() {
     parseProjects.projects.forEach((project) => {
         _1.projectsSetup.addProject(project.name);
         populateTasks(_1.projectsSetup.projects[_1.projectsSetup.projects.length - 1], project.tasks);
-        exports.numberOfProjects += 1;
     });
 }
 exports.getLocalStorage = getLocalStorage;

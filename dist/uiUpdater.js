@@ -1,16 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.refreshTasks = exports.refreshProjects = exports.loopTasks = exports.loopProjects = exports.currentProject = exports.projectAddButton = void 0;
+exports.refreshTasks = exports.refreshProjects = exports.loopTasks = exports.loopProjects = exports.projectIndex = exports.projectAddButton = void 0;
 const _1 = require(".");
 const addButtons_1 = require("./addButtons");
 const localStorage_1 = require("./localStorage");
 exports.projectAddButton = document.querySelector('.addProject');
-exports.currentProject = 'Project 1';
+exports.projectIndex = 0;
 let projectList = document.querySelector('.projects');
 let projectTasks = document.querySelector('.projectTasks');
 const taskHeader = document.querySelector('.taskHeader');
 function loopProjects() {
     refreshProjects();
+    taskHeaderFix();
     _1.projectsSetup.projects.forEach(project => {
         let div = document.createElement('div');
         let spacer = document.createElement('div');
@@ -27,8 +28,8 @@ function loopProjects() {
         div.appendChild(displayText);
         div.appendChild(deleteButton);
         displayText.addEventListener('click', () => {
-            exports.currentProject = project.name;
-            taskHeader.textContent = `${exports.currentProject} Tasks`;
+            exports.projectIndex = _1.projectsSetup.projects.indexOf(project);
+            taskHeader.textContent = `${project.name} Tasks`;
             loopTasks(project);
         });
         deleteButton.addEventListener('click', () => deleteProject(project));
@@ -73,8 +74,8 @@ exports.refreshTasks = refreshTasks;
 function deleteProject(project) {
     _1.projectsSetup.projects.splice(_1.projectsSetup.projects.indexOf(project), 1);
     if (_1.projectsSetup.projects[0]) {
-        exports.currentProject = _1.projectsSetup.projects[0].name;
-        taskHeader.textContent = `${exports.currentProject} Tasks`;
+        project.name = _1.projectsSetup.projects[0].name;
+        taskHeader.textContent = `${project.name} Tasks`;
         loopTasks(_1.projectsSetup.projects[0]);
     }
     else {
@@ -83,3 +84,11 @@ function deleteProject(project) {
     loopProjects();
 }
 ;
+function taskHeaderFix() {
+    if (_1.projectsSetup.projects[0]) {
+        taskHeader.textContent = `${_1.projectsSetup.projects[0].name} Tasks`;
+    }
+    else {
+        taskHeader.textContent = 'Project 1';
+    }
+}

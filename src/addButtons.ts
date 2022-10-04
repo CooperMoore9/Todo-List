@@ -1,5 +1,5 @@
 import { projectsSetup } from '.';
-import {currentProject, loopProjects, loopTasks} from './uiUpdater';
+import { loopProjects, loopTasks, projectIndex} from './uiUpdater';
 
 let projectAddButton = document.querySelector('.addProject') as Element;
 export let taskAddButton = document.querySelector('.addTask') as Element;
@@ -20,12 +20,8 @@ export function addProject(){
 
 
 export function addTask(){
-    taskAddButton.addEventListener('click', () => {    
-        projectsSetup.projects.forEach(project => {
-            if(project.name === currentProject){
-                project.addTask('bruh', newDate , 'desc');
-                loopTasks(project);
-            };
-        });
+    taskAddButton.addEventListener('click', () => {
+        projectsSetup.projects[projectIndex].addTask('bruh', newDate , 'desc')
+        loopTasks(projectsSetup.projects[projectIndex]);
     });
 }

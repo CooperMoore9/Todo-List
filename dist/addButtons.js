@@ -22,13 +22,8 @@ exports.addProject = addProject;
 ;
 function addTask() {
     exports.taskAddButton.addEventListener('click', () => {
-        _1.projectsSetup.projects.forEach(project => {
-            if (project.name === uiUpdater_1.currentProject) {
-                project.addTask('bruh', newDate, 'desc');
-                (0, uiUpdater_1.loopTasks)(project);
-            }
-            ;
-        });
+        _1.projectsSetup.projects[uiUpdater_1.projectIndex].addTask('bruh', newDate, 'desc');
+        (0, uiUpdater_1.loopTasks)(_1.projectsSetup.projects[uiUpdater_1.projectIndex]);
     });
 }
 exports.addTask = addTask;
