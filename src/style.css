@@ -105,6 +105,17 @@ html {
     outline: inherit;
   }
 
+  input {
+    width: 85%;
+    border-radius: 2em;
+    border: 0;
+    padding-left: 0.2em;
+  }
+
+  input:focus {
+    outline:none!important;
+  }
+
   .addTask {
     display: flex;
     flex-direction: column;

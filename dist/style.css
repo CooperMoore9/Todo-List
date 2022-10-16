@@ -551,14 +551,6 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.ml-24 {
-  margin-left: 6rem;
-}
-
-.ml-12 {
-  margin-left: 3rem;
-}
-
 .ml-36 {
   margin-left: 9rem;
 }
@@ -571,30 +563,6 @@ video {
   height: 100%;
 }
 
-.h-1 {
-  height: 0.25rem;
-}
-
-.h-5\/6 {
-  height: 83.333333%;
-}
-
-.h-4\/6 {
-  height: 66.666667%;
-}
-
-.h-3\/6 {
-  height: 50%;
-}
-
-.h-1\/2 {
-  height: 50%;
-}
-
-.h-1\/4 {
-  height: 25%;
-}
-
 .w-full {
   width: 100%;
 }
@@ -603,36 +571,12 @@ video {
   width: 1.75rem;
 }
 
-.w-1 {
-  width: 0.25rem;
-}
-
-.w-8 {
-  width: 2rem;
-}
-
-.w-10 {
-  width: 2.5rem;
-}
-
-.w-64 {
-  width: 16rem;
-}
-
-.w-32 {
-  width: 8rem;
-}
-
 .flex-wrap {
   flex-wrap: wrap;
 }
 
 .items-center {
   align-items: center;
-}
-
-.justify-end {
-  justify-content: flex-end;
 }
 
 .justify-center {
@@ -766,6 +710,17 @@ header {
   font: inherit;
   cursor: pointer;
   outline: inherit;
+}
+
+input {
+  width: 85%;
+  border-radius: 2em;
+  border: 0;
+  padding-left: 0.2em;
+}
+
+input:focus {
+  outline:none!important;
 }
 
 .addTask {

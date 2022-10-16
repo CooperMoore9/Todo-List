@@ -15,20 +15,18 @@ export function loopProjects() {
     taskHeaderFix()
     projectsSetup.projects.forEach(project => {
         let div = document.createElement('div');
-        let spacer = document.createElement('div');
         let displayText = document.createElement('button');
         let deleteButton = document.createElement('button');
 
         div.classList.add('project', 'justify-around');
         div.classList.add(`${project.name.replace(/\s/g, '').toLowerCase()}`);
-        displayText.classList.add('w-full', 'pl-7');
+        displayText.classList.add('w-full', 'pl-7', `${project.name.replace(/\s/g, '').toLowerCase()}Title`);
         deleteButton.classList.add('w-7');
 
         deleteButton.textContent = 'X';
         displayText.textContent = project.name;
 
         projectList.insertBefore(div, projectAddButton)
-        div.appendChild(spacer);
         div.appendChild(displayText);
         div.appendChild(deleteButton);
 
@@ -37,6 +35,8 @@ export function loopProjects() {
             taskHeader.textContent = `${project.name} Tasks`;
             loopTasks(project);
         })
+
+        displayText.addEventListener('dblclick', () => renameProject(project))
 
         deleteButton.addEventListener('click', () => deleteProject(project));
         
@@ -114,4 +114,11 @@ export function loopTasks(selectedProject: Project) {
         }else {
             taskHeader.textContent = 'Project 1 Tasks'
         }
+    }
+
+    function renameProject(project: Project) {
+        let projectTitle = document.querySelector(`.${project.name.replace(/\s/g, '').toLowerCase()}Title`) as Element
+        projectTitle.replaceWith(document.createElement('input'))
+        project.name = 'user Input'
+        // loopProjects()
     }
