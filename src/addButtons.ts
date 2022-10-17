@@ -9,7 +9,16 @@ export function addProject(){
     projectAddButton.addEventListener('click', () => {
         if(projectsSetup.projects[0]){
             let lastProjectNumber = parseInt(projectsSetup.projects[projectsSetup.projects.length-1].name.replace( /^\D+/g, ''))
-            projectsSetup.addProject(`Project ${lastProjectNumber+=1}`)
+            if(projectsSetup.projects[projectsSetup.projects.length-1].name === `Project ${lastProjectNumber}`){
+                projectsSetup.addProject(`Project ${lastProjectNumber+=1}`)}
+            else {
+                let numberOfProjects = 1
+                projectsSetup.projects.forEach(project => {
+                    numberOfProjects+=1
+                });
+                projectsSetup.addProject(`Project ${numberOfProjects}`)
+            }
+            
         }else {
             projectsSetup.addProject(`Project 1`)
         }

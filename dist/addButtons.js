@@ -10,7 +10,16 @@ function addProject() {
     projectAddButton.addEventListener('click', () => {
         if (_1.projectsSetup.projects[0]) {
             let lastProjectNumber = parseInt(_1.projectsSetup.projects[_1.projectsSetup.projects.length - 1].name.replace(/^\D+/g, ''));
-            _1.projectsSetup.addProject(`Project ${lastProjectNumber += 1}`);
+            if (_1.projectsSetup.projects[_1.projectsSetup.projects.length - 1].name === `Project ${lastProjectNumber}`) {
+                _1.projectsSetup.addProject(`Project ${lastProjectNumber += 1}`);
+            }
+            else {
+                let numberOfProjects = 1;
+                _1.projectsSetup.projects.forEach(project => {
+                    numberOfProjects += 1;
+                });
+                _1.projectsSetup.addProject(`Project ${numberOfProjects}`);
+            }
         }
         else {
             _1.projectsSetup.addProject(`Project 1`);
