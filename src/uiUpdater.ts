@@ -119,6 +119,14 @@ export function loopTasks(selectedProject: Project) {
     function renameProject(project: Project) {
         let projectTitle = document.querySelector(`.${project.name.replace(/\s/g, '').toLowerCase()}Title`) as Element
         projectTitle.replaceWith(document.createElement('input'))
-        project.name = 'user Input'
-        // loopProjects()
+        let inputValue = document.querySelector('input')
+
+        inputValue?.addEventListener('keypress', function(event){
+            if(event.key === 'Enter'){
+                if(inputValue?.value)
+                project.name = inputValue?.value
+                loopProjects()
+            }
+        })
+
     }

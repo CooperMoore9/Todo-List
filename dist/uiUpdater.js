@@ -105,6 +105,12 @@ function taskHeaderFix() {
 function renameProject(project) {
     let projectTitle = document.querySelector(`.${project.name.replace(/\s/g, '').toLowerCase()}Title`);
     projectTitle.replaceWith(document.createElement('input'));
-    project.name = 'user Input';
-    // loopProjects()
+    let inputValue = document.querySelector('input');
+    inputValue === null || inputValue === void 0 ? void 0 : inputValue.addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+            if (inputValue === null || inputValue === void 0 ? void 0 : inputValue.value)
+                project.name = inputValue === null || inputValue === void 0 ? void 0 : inputValue.value;
+            loopProjects();
+        }
+    });
 }
