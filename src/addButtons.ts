@@ -31,8 +31,18 @@ export function addProject(){
 export function addTask(){
     taskAddButton.addEventListener('click', () => {
         if(projectsSetup.projects[0]){
-            projectsSetup.projects[projectIndex].addTask('bruh', newDate , 'desc')
+
+            let numOfTasks = 1
+            projectsSetup.projects[projectIndex].tasks.forEach(task => {
+                numOfTasks+=1
+                console.log(numOfTasks)
+            })
+
+            projectsSetup.projects[projectIndex].addTask(`Task ${numOfTasks}`, newDate , 'Description')
             loopTasks(projectsSetup.projects[projectIndex]);
+
+
+            
         }else{return}
     });
 }

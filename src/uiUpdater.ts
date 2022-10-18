@@ -59,6 +59,10 @@ export function loopTasks(selectedProject: Project) {
             div.appendChild(taskDescription);
             div.appendChild(taskDeleteButton);
 
+            taskTitle.classList.add('rename', 'taskTitle');
+            taskDescription.classList.add('rename', 'taskDescription');
+            taskDueDate.classList.add('taskDueDate');
+
             taskTitle.textContent = task.title;
             taskDueDate.textContent = '10/10/2022';
             taskDescription.textContent = task.description;
@@ -68,7 +72,13 @@ export function loopTasks(selectedProject: Project) {
             taskDeleteButton.classList.add('w-7', 'ml-36')
             div.classList.add('task');
 
+            taskTitle.style.cursor = 'pointer'
+            taskDescription.style.cursor = 'pointer'
+
             projectTasks.insertBefore(div, taskAddButton);
+            
+            taskTitle.addEventListener('dblclick', () => renameTaskTitle(task))
+            taskDescription.addEventListener('dblclick', () => renameTaskDescription(task))
 
             taskDeleteButton.addEventListener('click', () => deleteTask(task))
 
@@ -117,6 +127,7 @@ export function loopTasks(selectedProject: Project) {
     }
 
     function renameProject(project: Project) {
+        loopProjects()
         let projectTitle = document.querySelector(`.${project.name.replace(/\s/g, '').toLowerCase()}Title`) as Element
         projectTitle.replaceWith(document.createElement('input'))
         let inputValue = document.querySelector('input')
@@ -129,4 +140,14 @@ export function loopTasks(selectedProject: Project) {
             }
         })
 
+    }
+
+    function renameTaskTitle(task: Task){
+        let taskTitle = document.querySelector(`${task.title}`)
+        taskTitle?.replaceWith(document.createElement('input'))
+        console.log(taskTitle)
+    }
+
+    function renameTaskDescription(task: Task){
+        console.log(task.description)
     }

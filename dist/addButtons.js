@@ -32,7 +32,12 @@ exports.addProject = addProject;
 function addTask() {
     exports.taskAddButton.addEventListener('click', () => {
         if (_1.projectsSetup.projects[0]) {
-            _1.projectsSetup.projects[uiUpdater_1.projectIndex].addTask('bruh', newDate, 'desc');
+            let numOfTasks = 1;
+            _1.projectsSetup.projects[uiUpdater_1.projectIndex].tasks.forEach(task => {
+                numOfTasks += 1;
+                console.log(numOfTasks);
+            });
+            _1.projectsSetup.projects[uiUpdater_1.projectIndex].addTask(`Task ${numOfTasks}`, newDate, 'Description');
             (0, uiUpdater_1.loopTasks)(_1.projectsSetup.projects[uiUpdater_1.projectIndex]);
         }
         else {

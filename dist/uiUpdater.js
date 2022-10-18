@@ -48,6 +48,9 @@ function loopTasks(selectedProject) {
         div.appendChild(taskDueDate);
         div.appendChild(taskDescription);
         div.appendChild(taskDeleteButton);
+        taskTitle.classList.add('rename', 'taskTitle');
+        taskDescription.classList.add('rename', 'taskDescription');
+        taskDueDate.classList.add('taskDueDate');
         taskTitle.textContent = task.title;
         taskDueDate.textContent = '10/10/2022';
         taskDescription.textContent = task.description;
@@ -55,7 +58,11 @@ function loopTasks(selectedProject) {
         taskDescription.classList.add('h-full');
         taskDeleteButton.classList.add('w-7', 'ml-36');
         div.classList.add('task');
+        taskTitle.style.cursor = 'pointer';
+        taskDescription.style.cursor = 'pointer';
         projectTasks.insertBefore(div, addButtons_1.taskAddButton);
+        taskTitle.addEventListener('dblclick', () => renameTaskTitle(task));
+        taskDescription.addEventListener('dblclick', () => renameTaskDescription(task));
         taskDeleteButton.addEventListener('click', () => deleteTask(task));
     });
     (0, localStorage_1.localProjectStorage)();
@@ -103,6 +110,7 @@ function taskHeaderFix() {
     }
 }
 function renameProject(project) {
+    loopProjects();
     let projectTitle = document.querySelector(`.${project.name.replace(/\s/g, '').toLowerCase()}Title`);
     projectTitle.replaceWith(document.createElement('input'));
     let inputValue = document.querySelector('input');
@@ -113,4 +121,12 @@ function renameProject(project) {
             loopProjects();
         }
     });
+}
+function renameTaskTitle(task) {
+    let taskTitle = document.querySelector(`${task.title}`);
+    taskTitle === null || taskTitle === void 0 ? void 0 : taskTitle.replaceWith(document.createElement('input'));
+    console.log(taskTitle);
+}
+function renameTaskDescription(task) {
+    console.log(task.description);
 }
