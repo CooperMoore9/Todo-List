@@ -48,7 +48,7 @@ function loopTasks(selectedProject) {
         div.appendChild(taskDueDate);
         div.appendChild(taskDescription);
         div.appendChild(taskDeleteButton);
-        taskTitle.classList.add('rename', 'taskTitle');
+        taskTitle.classList.add('rename', 'taskTitle', `${task.title.replace(/\s/g, '').toLowerCase()}`);
         taskDescription.classList.add('rename', 'taskDescription');
         taskDueDate.classList.add('taskDueDate');
         taskTitle.textContent = task.title;
@@ -61,7 +61,7 @@ function loopTasks(selectedProject) {
         taskTitle.style.cursor = 'pointer';
         taskDescription.style.cursor = 'pointer';
         projectTasks.insertBefore(div, addButtons_1.taskAddButton);
-        taskTitle.addEventListener('dblclick', () => renameTaskTitle(task));
+        taskTitle.addEventListener('dblclick', () => renameTaskTitle(task, selectedProject));
         taskDescription.addEventListener('dblclick', () => renameTaskDescription(task));
         taskDeleteButton.addEventListener('click', () => deleteTask(task));
     });
@@ -111,6 +111,7 @@ function taskHeaderFix() {
 }
 function renameProject(project) {
     loopProjects();
+    loopTasks(project);
     let projectTitle = document.querySelector(`.${project.name.replace(/\s/g, '').toLowerCase()}Title`);
     projectTitle.replaceWith(document.createElement('input'));
     let inputValue = document.querySelector('input');
@@ -122,10 +123,19 @@ function renameProject(project) {
         }
     });
 }
-function renameTaskTitle(task) {
-    let taskTitle = document.querySelector(`${task.title}`);
+function renameTaskTitle(task, project) {
+    loopProjects();
+    loopTasks(project);
+    let taskTitle = document.querySelector(`.${task.title.replace(/\s/g, '').toLowerCase()}`);
     taskTitle === null || taskTitle === void 0 ? void 0 : taskTitle.replaceWith(document.createElement('input'));
-    console.log(taskTitle);
+    let inputValue = document.querySelector('input');
+    inputValue === null || inputValue === void 0 ? void 0 : inputValue.addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+            if (inputValue === null || inputValue === void 0 ? void 0 : inputValue.value)
+                task.title = inputValue === null || inputValue === void 0 ? void 0 : inputValue.value;
+            loopTasks(project);
+        }
+    });
 }
 function renameTaskDescription(task) {
     console.log(task.description);

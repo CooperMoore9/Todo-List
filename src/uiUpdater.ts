@@ -59,7 +59,7 @@ export function loopTasks(selectedProject: Project) {
             div.appendChild(taskDescription);
             div.appendChild(taskDeleteButton);
 
-            taskTitle.classList.add('rename', 'taskTitle');
+            taskTitle.classList.add('rename', 'taskTitle', `${task.title.replace(/\s/g, '').toLowerCase()}`);
             taskDescription.classList.add('rename', 'taskDescription');
             taskDueDate.classList.add('taskDueDate');
 
@@ -77,7 +77,7 @@ export function loopTasks(selectedProject: Project) {
 
             projectTasks.insertBefore(div, taskAddButton);
             
-            taskTitle.addEventListener('dblclick', () => renameTaskTitle(task))
+            taskTitle.addEventListener('dblclick', () => renameTaskTitle(task, selectedProject ))
             taskDescription.addEventListener('dblclick', () => renameTaskDescription(task))
 
             taskDeleteButton.addEventListener('click', () => deleteTask(task))
@@ -128,6 +128,7 @@ export function loopTasks(selectedProject: Project) {
 
     function renameProject(project: Project) {
         loopProjects()
+        loopTasks(project)
         let projectTitle = document.querySelector(`.${project.name.replace(/\s/g, '').toLowerCase()}Title`) as Element
         projectTitle.replaceWith(document.createElement('input'))
         let inputValue = document.querySelector('input')
@@ -142,10 +143,21 @@ export function loopTasks(selectedProject: Project) {
 
     }
 
-    function renameTaskTitle(task: Task){
-        let taskTitle = document.querySelector(`${task.title}`)
+    function renameTaskTitle(task: Task, project: Project){
+        loopProjects()
+        loopTasks(project)
+        let taskTitle = document.querySelector(`.${task.title.replace(/\s/g, '').toLowerCase()}`)
         taskTitle?.replaceWith(document.createElement('input'))
-        console.log(taskTitle)
+        let inputValue = document.querySelector('input')
+
+        inputValue?.addEventListener('keypress', function(event){
+            if(event.key === 'Enter'){
+                if(inputValue?.value)
+                task.title = inputValue?.value
+                loopTasks(project)
+            }
+        })
+
     }
 
     function renameTaskDescription(task: Task){
