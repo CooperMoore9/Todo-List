@@ -115,13 +115,36 @@ function renameProject(project) {
     let projectTitle = document.querySelector(`.${project.name.replace(/\s/g, '').toLowerCase()}Title`);
     projectTitle.replaceWith(document.createElement('input'));
     let inputValue = document.querySelector('input');
+    // Fix bug where things can be the same name, loop through projects and check input value is equal to any title, is so alert
     inputValue === null || inputValue === void 0 ? void 0 : inputValue.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
-            if (inputValue === null || inputValue === void 0 ? void 0 : inputValue.value)
-                project.name = inputValue === null || inputValue === void 0 ? void 0 : inputValue.value;
+            if (checkName(inputValue === null || inputValue === void 0 ? void 0 : inputValue.value) === true) {
+                alert("Projects can't be named the same");
+            }
+            else {
+                changeName(project, inputValue === null || inputValue === void 0 ? void 0 : inputValue.value);
+            }
             loopProjects();
         }
     });
+}
+function checkName(inputValue) {
+    let nameCheckVar = 0;
+    for (let i = 0; i < _1.projectsSetup.projects.length; i++) {
+        if (inputValue === _1.projectsSetup.projects[i].name) {
+            nameCheckVar += 1;
+        }
+    }
+    ;
+    if (nameCheckVar >= 1) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+function changeName(project, inputValue) {
+    project.name = inputValue;
 }
 function renameTaskTitle(task, project) {
     loopProjects();

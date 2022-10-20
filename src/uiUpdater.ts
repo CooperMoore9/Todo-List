@@ -13,6 +13,7 @@ const taskHeader = document.querySelector('.taskHeader') as Element;
 export function loopProjects() {
     refreshProjects()
     taskHeaderFix()
+
     projectsSetup.projects.forEach(project => {
         let div = document.createElement('div');
         let displayText = document.createElement('button');
@@ -133,14 +134,37 @@ export function loopTasks(selectedProject: Project) {
         projectTitle.replaceWith(document.createElement('input'))
         let inputValue = document.querySelector('input')
 
+// Fix bug where things can be the same name, loop through projects and check input value is equal to any title, is so alert
+
         inputValue?.addEventListener('keypress', function(event){
             if(event.key === 'Enter'){
-                if(inputValue?.value)
-                project.name = inputValue?.value
+
+                if(checkName(inputValue?.value as string) === true){
+                    alert("Projects can't be named the same")
+                }else{
+                    changeName(project, inputValue?.value as string)
+                }
+
                 loopProjects()
             }
         })
 
+    }
+
+    function checkName(inputValue: string){
+        let nameCheckVar = 0
+        for(let i = 0; i < projectsSetup.projects.length; i++) {
+            if(inputValue === projectsSetup.projects[i].name) {
+                nameCheckVar += 1
+            }
+        };
+        if(nameCheckVar >= 1){
+            return true
+        }else{return false}
+    }
+
+    function changeName(project: Project, inputValue: string){
+                project.name = inputValue;
     }
 
     function renameTaskTitle(task: Task, project: Project){
@@ -152,6 +176,7 @@ export function loopTasks(selectedProject: Project) {
 
         inputValue?.addEventListener('keypress', function(event){
             if(event.key === 'Enter'){
+                
                 if(inputValue?.value)
                 task.title = inputValue?.value
                 loopTasks(project)
