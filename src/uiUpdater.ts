@@ -60,8 +60,8 @@ export function loopTasks(selectedProject: Project) {
             div.appendChild(taskDescription);
             div.appendChild(taskDeleteButton);
 
-            taskTitle.classList.add('rename', 'taskTitle', `${task.title.replace(/\s/g, '').toLowerCase()}`);
-            taskDescription.classList.add('rename', 'taskDescription');
+            taskTitle.classList.add('taskTitle', `${task.title.replace(/\s/g, '').toLowerCase()}`);
+            taskDescription.classList.add( `${task.title.replace(/\s/g, '').toLowerCase()}Description`);
             taskDueDate.classList.add('taskDueDate');
 
             taskTitle.textContent = task.title;
@@ -79,7 +79,7 @@ export function loopTasks(selectedProject: Project) {
             projectTasks.insertBefore(div, taskAddButton);
             
             taskTitle.addEventListener('dblclick', () => renameTaskTitle(task, selectedProject ))
-            taskDescription.addEventListener('dblclick', () => renameTaskDescription(task))
+            taskDescription.addEventListener('dblclick', () => renameTaskDescription(task, selectedProject))
 
             taskDeleteButton.addEventListener('click', () => deleteTask(task))
 
@@ -182,6 +182,19 @@ export function loopTasks(selectedProject: Project) {
 
     }
 
-    function renameTaskDescription(task: Task){
-        console.log(task.description)
+    function renameTaskDescription(task: Task, project: Project){
+        let taskDesc = document.querySelector(`.${task.title.replace(/\s/g, '').toLowerCase()}Description`)
+        taskDesc?.replaceWith(document.createElement('input'))
+        let inputValue = document.querySelector('input')
+        inputValue?.classList.add('h-full')
+
+        inputValue?.addEventListener('keypress', function(event){
+            if(event.key === 'Enter'){
+                if(inputValue?.value)
+                task.description = inputValue?.value
+                loopTasks(project)
+            }
+        })
+
+        console.log(taskDesc)
     }

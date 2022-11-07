@@ -48,8 +48,8 @@ function loopTasks(selectedProject) {
         div.appendChild(taskDueDate);
         div.appendChild(taskDescription);
         div.appendChild(taskDeleteButton);
-        taskTitle.classList.add('rename', 'taskTitle', `${task.title.replace(/\s/g, '').toLowerCase()}`);
-        taskDescription.classList.add('rename', 'taskDescription');
+        taskTitle.classList.add('taskTitle', `${task.title.replace(/\s/g, '').toLowerCase()}`);
+        taskDescription.classList.add(`${task.title.replace(/\s/g, '').toLowerCase()}Description`);
         taskDueDate.classList.add('taskDueDate');
         taskTitle.textContent = task.title;
         taskDueDate.textContent = '10/10/2022';
@@ -62,7 +62,7 @@ function loopTasks(selectedProject) {
         taskDescription.style.cursor = 'pointer';
         projectTasks.insertBefore(div, addButtons_1.taskAddButton);
         taskTitle.addEventListener('dblclick', () => renameTaskTitle(task, selectedProject));
-        taskDescription.addEventListener('dblclick', () => renameTaskDescription(task));
+        taskDescription.addEventListener('dblclick', () => renameTaskDescription(task, selectedProject));
         taskDeleteButton.addEventListener('click', () => deleteTask(task));
     });
     (0, localStorage_1.localProjectStorage)();
@@ -159,6 +159,17 @@ function renameTaskTitle(task, project) {
         }
     });
 }
-function renameTaskDescription(task) {
-    console.log(task.description);
+function renameTaskDescription(task, project) {
+    let taskDesc = document.querySelector(`.${task.title.replace(/\s/g, '').toLowerCase()}Description`);
+    taskDesc === null || taskDesc === void 0 ? void 0 : taskDesc.replaceWith(document.createElement('input'));
+    let inputValue = document.querySelector('input');
+    inputValue === null || inputValue === void 0 ? void 0 : inputValue.classList.add('h-full');
+    inputValue === null || inputValue === void 0 ? void 0 : inputValue.addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+            if (inputValue === null || inputValue === void 0 ? void 0 : inputValue.value)
+                task.description = inputValue === null || inputValue === void 0 ? void 0 : inputValue.value;
+            loopTasks(project);
+        }
+    });
+    console.log(taskDesc);
 }
