@@ -20,8 +20,8 @@ export function loopProjects() {
         let deleteButton = document.createElement('button');
 
         div.classList.add('project', 'justify-around');
-        div.classList.add(`${project.name.replace(/\s/g, '').toLowerCase()}`);
-        displayText.classList.add('w-full', 'pl-7', `${project.name.replace(/\s/g, '').toLowerCase()}Title`);
+        div.classList.add(`project${projectsSetup.projects.indexOf(project)}`);
+        displayText.classList.add('w-full', 'pl-7', `project${projectsSetup.projects.indexOf(project)}Title`);
         deleteButton.classList.add('w-7');
 
         deleteButton.textContent = 'X';
@@ -130,7 +130,7 @@ export function loopTasks(selectedProject: Project) {
     function renameProject(project: Project) {
         loopProjects()
         loopTasks(project)
-        let projectTitle = document.querySelector(`.${project.name.replace(/\s/g, '').toLowerCase()}Title`) as Element
+        let projectTitle = document.querySelector(`.project${projectsSetup.projects.indexOf(project)}Title`) as Element
         projectTitle.replaceWith(document.createElement('input'))
         let inputValue = document.querySelector('input')
 

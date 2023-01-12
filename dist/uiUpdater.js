@@ -17,8 +17,8 @@ function loopProjects() {
         let displayText = document.createElement('button');
         let deleteButton = document.createElement('button');
         div.classList.add('project', 'justify-around');
-        div.classList.add(`${project.name.replace(/\s/g, '').toLowerCase()}`);
-        displayText.classList.add('w-full', 'pl-7', `${project.name.replace(/\s/g, '').toLowerCase()}Title`);
+        div.classList.add(`project${_1.projectsSetup.projects.indexOf(project)}`);
+        displayText.classList.add('w-full', 'pl-7', `project${_1.projectsSetup.projects.indexOf(project)}Title`);
         deleteButton.classList.add('w-7');
         deleteButton.textContent = 'X';
         displayText.textContent = project.name;
@@ -112,7 +112,7 @@ function taskHeaderFix() {
 function renameProject(project) {
     loopProjects();
     loopTasks(project);
-    let projectTitle = document.querySelector(`.${project.name.replace(/\s/g, '').toLowerCase()}Title`);
+    let projectTitle = document.querySelector(`.project${_1.projectsSetup.projects.indexOf(project)}Title`);
     projectTitle.replaceWith(document.createElement('input'));
     let inputValue = document.querySelector('input');
     inputValue === null || inputValue === void 0 ? void 0 : inputValue.addEventListener('keypress', function (event) {
