@@ -133,7 +133,6 @@ export function loopTasks(selectedProject: Project) {
         let projectTitle = document.querySelector(`.${project.name.replace(/\s/g, '').toLowerCase()}Title`) as Element
         projectTitle.replaceWith(document.createElement('input'))
         let inputValue = document.querySelector('input')
-        console.log(inputValue)
 
         inputValue?.addEventListener('keypress', function(event){
             if(event.key === 'Enter'){
