@@ -133,12 +133,13 @@ export function loopTasks(selectedProject: Project) {
         let projectTitle = document.querySelector(`.${project.name.replace(/\s/g, '').toLowerCase()}Title`) as Element
         projectTitle.replaceWith(document.createElement('input'))
         let inputValue = document.querySelector('input')
+        console.log(inputValue)
 
         inputValue?.addEventListener('keypress', function(event){
             if(event.key === 'Enter'){
 
-                if(checkNameProject(inputValue?.value as string) === true){
-                    alert("Projects can't be named the same")
+                if(checkNameProject(inputValue?.value as string) === true || inputValue?.value.length === 0){
+                    alert("Projects can't be named the same or empty")
                 }else{
                     changeName(project, inputValue?.value as string)
                 }
