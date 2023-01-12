@@ -48,8 +48,8 @@ function loopTasks(selectedProject) {
         div.appendChild(taskDueDate);
         div.appendChild(taskDescription);
         div.appendChild(taskDeleteButton);
-        taskTitle.classList.add('taskTitle', `${task.title.replace(/\s/g, '').toLowerCase()}`);
-        taskDescription.classList.add(`${task.title.replace(/\s/g, '').toLowerCase()}Description`);
+        taskTitle.classList.add('taskTitle', `task${_1.projectsSetup.projects[exports.projectIndex].tasks.indexOf(task)}Title`);
+        taskDescription.classList.add(`task${_1.projectsSetup.projects[exports.projectIndex].tasks.indexOf(task)}Description`);
         taskDueDate.classList.add('taskDueDate');
         taskTitle.textContent = task.title;
         taskDueDate.textContent = '10/10/2022';
@@ -148,7 +148,7 @@ function changeName(project, inputValue) {
 function renameTaskTitle(task, project) {
     loopProjects();
     loopTasks(project);
-    let taskTitle = document.querySelector(`.${task.title.replace(/\s/g, '').toLowerCase()}`);
+    let taskTitle = document.querySelector(`.task${_1.projectsSetup.projects[exports.projectIndex].tasks.indexOf(task)}Title`);
     taskTitle === null || taskTitle === void 0 ? void 0 : taskTitle.replaceWith(document.createElement('input'));
     let inputValue = document.querySelector('input');
     inputValue === null || inputValue === void 0 ? void 0 : inputValue.addEventListener('keypress', function (event) {
@@ -162,7 +162,7 @@ function renameTaskTitle(task, project) {
 function renameTaskDescription(task, project) {
     loopProjects();
     loopTasks(project);
-    let taskDesc = document.querySelector(`.${task.title.replace(/\s/g, '').toLowerCase()}Description`);
+    let taskDesc = document.querySelector(`.task${_1.projectsSetup.projects[exports.projectIndex].tasks.indexOf(task)}Description`);
     taskDesc === null || taskDesc === void 0 ? void 0 : taskDesc.replaceWith(document.createElement('input'));
     let inputValue = document.querySelector('input');
     inputValue === null || inputValue === void 0 ? void 0 : inputValue.classList.add('h-full');
