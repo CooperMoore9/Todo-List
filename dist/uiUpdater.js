@@ -160,6 +160,8 @@ function renameTaskTitle(task, project) {
     });
 }
 function renameTaskDescription(task, project) {
+    loopProjects();
+    loopTasks(project);
     let taskDesc = document.querySelector(`.${task.title.replace(/\s/g, '').toLowerCase()}Description`);
     taskDesc === null || taskDesc === void 0 ? void 0 : taskDesc.replaceWith(document.createElement('input'));
     let inputValue = document.querySelector('input');

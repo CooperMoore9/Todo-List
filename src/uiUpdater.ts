@@ -183,6 +183,8 @@ export function loopTasks(selectedProject: Project) {
     }
 
     function renameTaskDescription(task: Task, project: Project){
+        loopProjects()
+        loopTasks(project)
         let taskDesc = document.querySelector(`.${task.title.replace(/\s/g, '').toLowerCase()}Description`)
         taskDesc?.replaceWith(document.createElement('input'))
         let inputValue = document.querySelector('input')
