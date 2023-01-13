@@ -137,8 +137,7 @@ export function loopTasks(selectedProject: Project) {
         inputValue?.addEventListener('keypress', function(event){
             if(event.key === 'Enter'){
 
-                if(checkNameProject(inputValue?.value as string) === true || inputValue?.value.length === 0){
-                    alert("Projects can't be named the same or empty")
+                if(checkNameProject(inputValue?.value as string) === true || inputValue?.value.trim().length === 0){                    alert("Projects can't be named the same or empty")
                 }else{
                     changeName(project, inputValue?.value as string)
                 }

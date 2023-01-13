@@ -117,7 +117,7 @@ function renameProject(project) {
     let inputValue = document.querySelector('input');
     inputValue === null || inputValue === void 0 ? void 0 : inputValue.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
-            if (checkNameProject(inputValue === null || inputValue === void 0 ? void 0 : inputValue.value) === true || (inputValue === null || inputValue === void 0 ? void 0 : inputValue.value.length) === 0) {
+            if (checkNameProject(inputValue === null || inputValue === void 0 ? void 0 : inputValue.value) === true || (inputValue === null || inputValue === void 0 ? void 0 : inputValue.value.trim().length) === 0) {
                 alert("Projects can't be named the same or empty");
             }
             else {
