@@ -196,6 +196,4 @@ export function loopTasks(selectedProject: Project) {
                 loopTasks(project)
             }
         })
-
-        console.log(taskDesc)
     }

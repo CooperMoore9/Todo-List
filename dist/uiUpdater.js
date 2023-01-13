@@ -173,5 +173,4 @@ function renameTaskDescription(task, project) {
             loopTasks(project);
         }
     });
-    console.log(taskDesc);
 }
