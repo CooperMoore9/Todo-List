@@ -1,5 +1,5 @@
 import { projectsSetup } from ".";
-import { taskAddButton } from "./addButtons";
+import { addProject, taskAddButton } from "./addButtons";
 import { Project, Task } from "./allProjectsObject";
 import { localProjectStorage } from "./localStorage";
 
@@ -21,8 +21,10 @@ export function loopProjects() {
 
         div.classList.add('project', 'justify-around');
         div.classList.add(`project${projectsSetup.projects.indexOf(project)}`);
-        displayText.classList.add('w-full', 'pl-7', `project${projectsSetup.projects.indexOf(project)}Title`);
+        displayText.classList.add('w-full', 'pl-7', `taskTitle${project.id}`);
         deleteButton.classList.add('w-7');
+
+        
 
         deleteButton.textContent = 'X';
         displayText.textContent = project.name;
@@ -60,8 +62,8 @@ export function loopTasks(selectedProject: Project) {
             div.appendChild(taskDescription);
             div.appendChild(taskDeleteButton);
 
-            taskTitle.classList.add('taskTitle', `task${projectsSetup.projects[projectIndex].tasks.indexOf(task)}Title`);
-            taskDescription.classList.add(`task${projectsSetup.projects[projectIndex].tasks.indexOf(task)}Description`);
+            taskTitle.classList.add('taskTitle', `taskTitle${task.id}`);
+            taskDescription.classList.add(`taskDescription${task.id}`);
             taskDueDate.classList.add('taskDueDate');
 
             taskTitle.textContent = task.title;
@@ -111,6 +113,7 @@ export function loopTasks(selectedProject: Project) {
             refreshTasks()
         }
         loopProjects();
+
     };
 
     function deleteTask(task: Task) {
@@ -130,7 +133,7 @@ export function loopTasks(selectedProject: Project) {
     function renameProject(project: Project) {
         loopProjects()
         loopTasks(project)
-        let projectTitle = document.querySelector(`.project${projectsSetup.projects.indexOf(project)}Title`) as Element
+        let projectTitle = document.querySelector(`.taskTitle${project.id}`) as Element
         projectTitle.replaceWith(document.createElement('input'))
         let inputValue = document.querySelector('input')
 
@@ -167,7 +170,7 @@ export function loopTasks(selectedProject: Project) {
     function renameTaskTitle(task: Task, project: Project){
         loopProjects()
         loopTasks(project)
-        let taskTitle = document.querySelector(`.task${projectsSetup.projects[projectIndex].tasks.indexOf(task)}Title`)
+        let taskTitle = document.querySelector(`.taskTitle${task.id}`)
         taskTitle?.replaceWith(document.createElement('input'))
         let inputValue = document.querySelector('input')
 
@@ -184,7 +187,7 @@ export function loopTasks(selectedProject: Project) {
     function renameTaskDescription(task: Task, project: Project){
         loopProjects()
         loopTasks(project)
-        let taskDesc = document.querySelector(`.task${projectsSetup.projects[projectIndex].tasks.indexOf(task)}Description`)
+        let taskDesc = document.querySelector(`.taskDescription${task.id}`)
         taskDesc?.replaceWith(document.createElement('input'))
         let inputValue = document.querySelector('input')
         inputValue?.classList.add('h-full')

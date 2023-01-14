@@ -35,7 +35,6 @@ export function addTask(){
             let numOfTasks = 1
             projectsSetup.projects[projectIndex].tasks.forEach(task => {
                 numOfTasks+=1
-                console.log(numOfTasks)
             })
 
             projectsSetup.projects[projectIndex].addTask(`Task ${numOfTasks}`, newDate , 'Description')
