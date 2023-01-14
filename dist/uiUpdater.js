@@ -18,7 +18,7 @@ function loopProjects() {
         let deleteButton = document.createElement('button');
         div.classList.add('project', 'justify-around');
         div.classList.add(`project${_1.projectsSetup.projects.indexOf(project)}`);
-        displayText.classList.add('w-full', 'pl-7', `project${_1.projectsSetup.projects.indexOf(project)}Title`);
+        displayText.classList.add('w-full', 'pl-7', `taskTitle${project.id}`);
         deleteButton.classList.add('w-7');
         deleteButton.textContent = 'X';
         displayText.textContent = project.name;
@@ -48,8 +48,8 @@ function loopTasks(selectedProject) {
         div.appendChild(taskDueDate);
         div.appendChild(taskDescription);
         div.appendChild(taskDeleteButton);
-        taskTitle.classList.add('taskTitle', `task${_1.projectsSetup.projects[exports.projectIndex].tasks.indexOf(task)}Title`);
-        taskDescription.classList.add(`task${_1.projectsSetup.projects[exports.projectIndex].tasks.indexOf(task)}Description`);
+        taskTitle.classList.add('taskTitle', `taskTitle${task.id}`);
+        taskDescription.classList.add(`taskDescription${task.id}`);
         taskDueDate.classList.add('taskDueDate');
         taskTitle.textContent = task.title;
         taskDueDate.textContent = '10/10/2022';
@@ -88,6 +88,7 @@ function deleteProject(project) {
     if (_1.projectsSetup.projects[0]) {
         project.name = _1.projectsSetup.projects[0].name;
         taskHeader.textContent = `${project.name} Tasks`;
+        refreshTasks();
         loopTasks(_1.projectsSetup.projects[0]);
     }
     else {
@@ -112,7 +113,7 @@ function taskHeaderFix() {
 function renameProject(project) {
     loopProjects();
     loopTasks(project);
-    let projectTitle = document.querySelector(`.project${_1.projectsSetup.projects.indexOf(project)}Title`);
+    let projectTitle = document.querySelector(`.taskTitle${project.id}`);
     projectTitle.replaceWith(document.createElement('input'));
     let inputValue = document.querySelector('input');
     inputValue === null || inputValue === void 0 ? void 0 : inputValue.addEventListener('keypress', function (event) {
@@ -148,7 +149,7 @@ function changeName(project, inputValue) {
 function renameTaskTitle(task, project) {
     loopProjects();
     loopTasks(project);
-    let taskTitle = document.querySelector(`.task${_1.projectsSetup.projects[exports.projectIndex].tasks.indexOf(task)}Title`);
+    let taskTitle = document.querySelector(`.taskTitle${task.id}`);
     taskTitle === null || taskTitle === void 0 ? void 0 : taskTitle.replaceWith(document.createElement('input'));
     let inputValue = document.querySelector('input');
     inputValue === null || inputValue === void 0 ? void 0 : inputValue.addEventListener('keypress', function (event) {
@@ -162,7 +163,7 @@ function renameTaskTitle(task, project) {
 function renameTaskDescription(task, project) {
     loopProjects();
     loopTasks(project);
-    let taskDesc = document.querySelector(`.task${_1.projectsSetup.projects[exports.projectIndex].tasks.indexOf(task)}Description`);
+    let taskDesc = document.querySelector(`.taskDescription${task.id}`);
     taskDesc === null || taskDesc === void 0 ? void 0 : taskDesc.replaceWith(document.createElement('input'));
     let inputValue = document.querySelector('input');
     inputValue === null || inputValue === void 0 ? void 0 : inputValue.classList.add('h-full');

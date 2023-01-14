@@ -35,7 +35,6 @@ function addTask() {
             let numOfTasks = 1;
             _1.projectsSetup.projects[uiUpdater_1.projectIndex].tasks.forEach(task => {
                 numOfTasks += 1;
-                console.log(numOfTasks);
             });
             _1.projectsSetup.projects[uiUpdater_1.projectIndex].addTask(`Task ${numOfTasks}`, newDate, 'Description');
             (0, uiUpdater_1.loopTasks)(_1.projectsSetup.projects[uiUpdater_1.projectIndex]);
