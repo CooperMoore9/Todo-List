@@ -108,7 +108,6 @@ export function loopTasks(selectedProject: Project) {
         if(projectsSetup.projects[0]){
             project.name = projectsSetup.projects[0].name;
             taskHeader.textContent = `${project.name} Tasks`;
-            refreshTasks()
             loopTasks(projectsSetup.projects[0]);
         }else{
             refreshTasks()

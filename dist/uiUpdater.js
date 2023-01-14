@@ -88,7 +88,6 @@ function deleteProject(project) {
     if (_1.projectsSetup.projects[0]) {
         project.name = _1.projectsSetup.projects[0].name;
         taskHeader.textContent = `${project.name} Tasks`;
-        refreshTasks();
         loopTasks(_1.projectsSetup.projects[0]);
     }
     else {
