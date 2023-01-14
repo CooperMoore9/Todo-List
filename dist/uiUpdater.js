@@ -87,6 +87,7 @@ function deleteProject(project) {
     _1.projectsSetup.projects.splice(_1.projectsSetup.projects.indexOf(project), 1);
     if (_1.projectsSetup.projects[0]) {
         project.name = _1.projectsSetup.projects[0].name;
+        exports.projectIndex = 0;
         taskHeader.textContent = `${project.name} Tasks`;
         loopTasks(_1.projectsSetup.projects[0]);
     }

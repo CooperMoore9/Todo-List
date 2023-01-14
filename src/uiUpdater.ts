@@ -107,6 +107,8 @@ export function loopTasks(selectedProject: Project) {
         projectsSetup.projects.splice(projectsSetup.projects.indexOf(project), 1);
         if(projectsSetup.projects[0]){
             project.name = projectsSetup.projects[0].name;
+            
+            projectIndex = 0
             taskHeader.textContent = `${project.name} Tasks`;
             loopTasks(projectsSetup.projects[0]);
         }else{
