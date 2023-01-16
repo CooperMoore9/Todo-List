@@ -2,6 +2,7 @@ import { projectsSetup } from ".";
 import { addProject, taskAddButton } from "./addButtons";
 import { Project, Task } from "./allProjectsObject";
 import { localProjectStorage } from "./localStorage";
+import { format, compareAsc } from 'date-fns'
 
 export let projectAddButton = document.querySelector('.addProject') as Element;
 export let projectIndex = 0;
@@ -67,7 +68,8 @@ export function loopTasks(selectedProject: Project) {
             taskDueDate.classList.add('h-1', `taskDueDate${task.id}`);
 
             taskTitle.textContent = task.title;
-            taskDueDate.textContent = '01/01/2020'
+            //Problem code
+            // taskDueDate.textContent = format(task.dueDate, 'mm/dd/yyyy'); 
             taskDescription.textContent = task.description;
             taskDeleteButton.textContent = 'X'
 
@@ -83,7 +85,7 @@ export function loopTasks(selectedProject: Project) {
             
             taskTitle.addEventListener('dblclick', () => renameTaskTitle(task, selectedProject ))
             taskDescription.addEventListener('dblclick', () => renameTaskDescription(task, selectedProject))
-            taskDueDate.addEventListener('dblclick', () => dateChange(task))
+            taskDueDate.addEventListener('dblclick', () => dateChange(task, selectedProject))
             taskDeleteButton.addEventListener('click', () => deleteTask(task))
 
         })
@@ -186,13 +188,17 @@ export function loopTasks(selectedProject: Project) {
 
     }
         
-    function dateChange(task: Task) {
+    function dateChange(task: Task, project: Project) {
         let taskDate = document.querySelector(`.taskDueDate${task.id}`)
         taskDate?.replaceWith(document.createElement('input'))
         let inputValue = document.querySelector('input')
         inputValue?.setAttribute('type', 'date')
+        inputValue?.classList.add('h-1')
         inputValue?.addEventListener('change', function(){
-            console.log('bingus')
+            console.log(inputValue?.value)
+            if(inputValue?.value)
+            task.dueDate = new Date(inputValue?.value)
+            loopTasks(project)
         })
     }
 

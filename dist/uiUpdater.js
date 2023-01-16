@@ -52,7 +52,8 @@ function loopTasks(selectedProject) {
         taskDescription.classList.add(`taskDescription${task.id}`);
         taskDueDate.classList.add('h-1', `taskDueDate${task.id}`);
         taskTitle.textContent = task.title;
-        taskDueDate.textContent = '01/01/2020';
+        //Problem code
+        // taskDueDate.textContent = format(task.dueDate, 'mm/dd/yyyy'); 
         taskDescription.textContent = task.description;
         taskDeleteButton.textContent = 'X';
         taskDescription.classList.add('h-full');
@@ -64,7 +65,7 @@ function loopTasks(selectedProject) {
         projectTasks.insertBefore(div, addButtons_1.taskAddButton);
         taskTitle.addEventListener('dblclick', () => renameTaskTitle(task, selectedProject));
         taskDescription.addEventListener('dblclick', () => renameTaskDescription(task, selectedProject));
-        taskDueDate.addEventListener('dblclick', () => dateChange(task));
+        taskDueDate.addEventListener('dblclick', () => dateChange(task, selectedProject));
         taskDeleteButton.addEventListener('click', () => deleteTask(task));
     });
     (0, localStorage_1.localProjectStorage)();
@@ -162,13 +163,17 @@ function renameTaskTitle(task, project) {
         }
     });
 }
-function dateChange(task) {
+function dateChange(task, project) {
     let taskDate = document.querySelector(`.taskDueDate${task.id}`);
     taskDate === null || taskDate === void 0 ? void 0 : taskDate.replaceWith(document.createElement('input'));
     let inputValue = document.querySelector('input');
     inputValue === null || inputValue === void 0 ? void 0 : inputValue.setAttribute('type', 'date');
+    inputValue === null || inputValue === void 0 ? void 0 : inputValue.classList.add('h-1');
     inputValue === null || inputValue === void 0 ? void 0 : inputValue.addEventListener('change', function () {
-        console.log('bingus');
+        console.log(inputValue === null || inputValue === void 0 ? void 0 : inputValue.value);
+        if (inputValue === null || inputValue === void 0 ? void 0 : inputValue.value)
+            task.dueDate = new Date(inputValue === null || inputValue === void 0 ? void 0 : inputValue.value);
+        loopTasks(project);
     });
 }
 function renameTaskDescription(task, project) {
