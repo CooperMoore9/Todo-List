@@ -61,7 +61,7 @@ html {
   }
 
   input[type="date"]::-webkit-calendar-picker-indicator {
-    /* background: transparent;
+    background: transparent;
     bottom: 0;
     color: transparent;
     cursor: pointer;
@@ -70,7 +70,7 @@ html {
     position: absolute;
     right: 0;
     top: 0;
-    width: auto; */
+    width: auto;
 }
 
   .projectTasks {

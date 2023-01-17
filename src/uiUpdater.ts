@@ -2,7 +2,7 @@ import { projectsSetup } from ".";
 import { addProject, taskAddButton } from "./addButtons";
 import { Project, Task } from "./allProjectsObject";
 import { localProjectStorage } from "./localStorage";
-import { format, compareAsc } from 'date-fns'
+import { format, compareAsc, parseISO, addDays } from 'date-fns'
 
 export let projectAddButton = document.querySelector('.addProject') as Element;
 export let projectIndex = 0;
@@ -65,11 +65,12 @@ export function loopTasks(selectedProject: Project) {
 
             taskTitle.classList.add('taskTitle', `taskTitle${task.id}`);
             taskDescription.classList.add(`taskDescription${task.id}`);
-            taskDueDate.classList.add('h-1', `taskDueDate${task.id}`);
+            taskDueDate.classList.add('h-7', `taskDueDate${task.id}`);
 
             taskTitle.textContent = task.title;
-            //Problem code
-            // taskDueDate.textContent = format(task.dueDate, 'mm/dd/yyyy'); 
+            task.dueDate = new Date(task.dueDate);
+            const ISODate = new Date(task.dueDate).toISOString();
+            taskDueDate.textContent = `Due: ${format(parseISO(ISODate), 'P')}`; 
             taskDescription.textContent = task.description;
             taskDeleteButton.textContent = 'X'
 
@@ -172,17 +173,21 @@ export function loopTasks(selectedProject: Project) {
     }
 
     function renameTaskTitle(task: Task, project: Project){
-        loopProjects()
-        loopTasks(project)
-        let taskTitle = document.querySelector(`.taskTitle${task.id}`)
-        taskTitle?.replaceWith(document.createElement('input'))
-        let inputValue = document.querySelector('input')
+        loopProjects();
+        loopTasks(project);
+        let taskTitle = document.querySelector(`.taskTitle${task.id}`);
+        taskTitle?.replaceWith(document.createElement('input'));
+        let inputValue = document.querySelector('input');
 
         inputValue?.addEventListener('keypress', function(event){
             if(event.key === 'Enter'){
-                if(inputValue?.value)
-                task.title = inputValue?.value
-                loopTasks(project)
+                if(inputValue?.value && inputValue.value.trim() !== ''){
+                    task.title = inputValue?.value;
+                    loopTasks(project);
+                }else{
+                    task.title = task.title;
+                    loopTasks(project);
+                }
             }
         })
 
@@ -193,12 +198,11 @@ export function loopTasks(selectedProject: Project) {
         taskDate?.replaceWith(document.createElement('input'))
         let inputValue = document.querySelector('input')
         inputValue?.setAttribute('type', 'date')
-        inputValue?.classList.add('h-1')
+        inputValue?.classList.add('h-7')
         inputValue?.addEventListener('change', function(){
-            console.log(inputValue?.value)
             if(inputValue?.value)
-            task.dueDate = new Date(inputValue?.value)
-            loopTasks(project)
+            task.dueDate = addDays(new Date(inputValue?.value), 1);
+            loopTasks(project);
         })
     }
 
@@ -212,9 +216,13 @@ export function loopTasks(selectedProject: Project) {
 
         inputValue?.addEventListener('keypress', function(event){
             if(event.key === 'Enter'){
-                if(inputValue?.value)
+                if(inputValue?.value && inputValue.value.trim() !== ''){
                 task.description = inputValue?.value
                 loopTasks(project)
+                }else{
+                    task.description = task.description
+                    loopTasks(project)
+                }
             }
         })
     }

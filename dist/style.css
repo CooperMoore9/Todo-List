@@ -571,8 +571,8 @@ video {
   display: table;
 }
 
-.h-1 {
-  height: 0.25rem;
+.h-4 {
+  height: 1rem;
 }
 
 .h-full {
