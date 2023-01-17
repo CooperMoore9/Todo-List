@@ -4,6 +4,7 @@ exports.refreshTasks = exports.refreshProjects = exports.loopTasks = exports.loo
 const _1 = require(".");
 const addButtons_1 = require("./addButtons");
 const localStorage_1 = require("./localStorage");
+const date_fns_1 = require("date-fns");
 exports.projectAddButton = document.querySelector('.addProject');
 exports.projectIndex = 0;
 let projectList = document.querySelector('.projects');
@@ -50,9 +51,11 @@ function loopTasks(selectedProject) {
         div.appendChild(taskDeleteButton);
         taskTitle.classList.add('taskTitle', `taskTitle${task.id}`);
         taskDescription.classList.add(`taskDescription${task.id}`);
-        taskDueDate.classList.add('taskDueDate');
+        taskDueDate.classList.add('h-7', `taskDueDate${task.id}`);
         taskTitle.textContent = task.title;
-        taskDueDate.textContent = '10/10/2022';
+        task.dueDate = new Date(task.dueDate);
+        const ISODate = new Date(task.dueDate).toISOString();
+        taskDueDate.textContent = `Due: ${(0, date_fns_1.format)((0, date_fns_1.parseISO)(ISODate), 'P')}`;
         taskDescription.textContent = task.description;
         taskDeleteButton.textContent = 'X';
         taskDescription.classList.add('h-full');
@@ -60,9 +63,11 @@ function loopTasks(selectedProject) {
         div.classList.add('task');
         taskTitle.style.cursor = 'pointer';
         taskDescription.style.cursor = 'pointer';
+        taskDueDate.style.cursor = 'pointer';
         projectTasks.insertBefore(div, addButtons_1.taskAddButton);
         taskTitle.addEventListener('dblclick', () => renameTaskTitle(task, selectedProject));
         taskDescription.addEventListener('dblclick', () => renameTaskDescription(task, selectedProject));
+        taskDueDate.addEventListener('dblclick', () => dateChange(task, selectedProject));
         taskDeleteButton.addEventListener('click', () => deleteTask(task));
     });
     (0, localStorage_1.localProjectStorage)();
@@ -154,10 +159,27 @@ function renameTaskTitle(task, project) {
     let inputValue = document.querySelector('input');
     inputValue === null || inputValue === void 0 ? void 0 : inputValue.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
-            if (inputValue === null || inputValue === void 0 ? void 0 : inputValue.value)
+            if ((inputValue === null || inputValue === void 0 ? void 0 : inputValue.value) && inputValue.value.trim() !== '') {
                 task.title = inputValue === null || inputValue === void 0 ? void 0 : inputValue.value;
-            loopTasks(project);
+                loopTasks(project);
+            }
+            else {
+                task.title = task.title;
+                loopTasks(project);
+            }
         }
+    });
+}
+function dateChange(task, project) {
+    let taskDate = document.querySelector(`.taskDueDate${task.id}`);
+    taskDate === null || taskDate === void 0 ? void 0 : taskDate.replaceWith(document.createElement('input'));
+    let inputValue = document.querySelector('input');
+    inputValue === null || inputValue === void 0 ? void 0 : inputValue.setAttribute('type', 'date');
+    inputValue === null || inputValue === void 0 ? void 0 : inputValue.classList.add('h-7');
+    inputValue === null || inputValue === void 0 ? void 0 : inputValue.addEventListener('change', function () {
+        if (inputValue === null || inputValue === void 0 ? void 0 : inputValue.value)
+            task.dueDate = (0, date_fns_1.addDays)(new Date(inputValue === null || inputValue === void 0 ? void 0 : inputValue.value), 1);
+        loopTasks(project);
     });
 }
 function renameTaskDescription(task, project) {
@@ -169,9 +191,14 @@ function renameTaskDescription(task, project) {
     inputValue === null || inputValue === void 0 ? void 0 : inputValue.classList.add('h-full');
     inputValue === null || inputValue === void 0 ? void 0 : inputValue.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
-            if (inputValue === null || inputValue === void 0 ? void 0 : inputValue.value)
+            if ((inputValue === null || inputValue === void 0 ? void 0 : inputValue.value) && inputValue.value.trim() !== '') {
                 task.description = inputValue === null || inputValue === void 0 ? void 0 : inputValue.value;
-            loopTasks(project);
+                loopTasks(project);
+            }
+            else {
+                task.description = task.description;
+                loopTasks(project);
+            }
         }
     });
 }

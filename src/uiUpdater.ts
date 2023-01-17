@@ -2,6 +2,7 @@ import { projectsSetup } from ".";
 import { addProject, taskAddButton } from "./addButtons";
 import { Project, Task } from "./allProjectsObject";
 import { localProjectStorage } from "./localStorage";
+import { format, compareAsc, parseISO, addDays } from 'date-fns'
 
 export let projectAddButton = document.querySelector('.addProject') as Element;
 export let projectIndex = 0;
@@ -64,10 +65,12 @@ export function loopTasks(selectedProject: Project) {
 
             taskTitle.classList.add('taskTitle', `taskTitle${task.id}`);
             taskDescription.classList.add(`taskDescription${task.id}`);
-            taskDueDate.classList.add('taskDueDate');
+            taskDueDate.classList.add('h-7', `taskDueDate${task.id}`);
 
             taskTitle.textContent = task.title;
-            taskDueDate.textContent = '10/10/2022';
+            task.dueDate = new Date(task.dueDate);
+            const ISODate = new Date(task.dueDate).toISOString();
+            taskDueDate.textContent = `Due: ${format(parseISO(ISODate), 'P')}`; 
             taskDescription.textContent = task.description;
             taskDeleteButton.textContent = 'X'
 
@@ -77,12 +80,13 @@ export function loopTasks(selectedProject: Project) {
 
             taskTitle.style.cursor = 'pointer'
             taskDescription.style.cursor = 'pointer'
+            taskDueDate.style.cursor = 'pointer'
 
             projectTasks.insertBefore(div, taskAddButton);
             
             taskTitle.addEventListener('dblclick', () => renameTaskTitle(task, selectedProject ))
             taskDescription.addEventListener('dblclick', () => renameTaskDescription(task, selectedProject))
-
+            taskDueDate.addEventListener('dblclick', () => dateChange(task, selectedProject))
             taskDeleteButton.addEventListener('click', () => deleteTask(task))
 
         })
@@ -107,7 +111,6 @@ export function loopTasks(selectedProject: Project) {
         projectsSetup.projects.splice(projectsSetup.projects.indexOf(project), 1);
         if(projectsSetup.projects[0]){
             project.name = projectsSetup.projects[0].name;
-            
             projectIndex = 0
             taskHeader.textContent = `${project.name} Tasks`;
             loopTasks(projectsSetup.projects[0]);
@@ -170,20 +173,37 @@ export function loopTasks(selectedProject: Project) {
     }
 
     function renameTaskTitle(task: Task, project: Project){
-        loopProjects()
-        loopTasks(project)
-        let taskTitle = document.querySelector(`.taskTitle${task.id}`)
-        taskTitle?.replaceWith(document.createElement('input'))
-        let inputValue = document.querySelector('input')
+        loopProjects();
+        loopTasks(project);
+        let taskTitle = document.querySelector(`.taskTitle${task.id}`);
+        taskTitle?.replaceWith(document.createElement('input'));
+        let inputValue = document.querySelector('input');
 
         inputValue?.addEventListener('keypress', function(event){
             if(event.key === 'Enter'){
-                if(inputValue?.value)
-                task.title = inputValue?.value
-                loopTasks(project)
+                if(inputValue?.value && inputValue.value.trim() !== ''){
+                    task.title = inputValue?.value;
+                    loopTasks(project);
+                }else{
+                    task.title = task.title;
+                    loopTasks(project);
+                }
             }
         })
 
+    }
+        
+    function dateChange(task: Task, project: Project) {
+        let taskDate = document.querySelector(`.taskDueDate${task.id}`)
+        taskDate?.replaceWith(document.createElement('input'))
+        let inputValue = document.querySelector('input')
+        inputValue?.setAttribute('type', 'date')
+        inputValue?.classList.add('h-7')
+        inputValue?.addEventListener('change', function(){
+            if(inputValue?.value)
+            task.dueDate = addDays(new Date(inputValue?.value), 1);
+            loopTasks(project);
+        })
     }
 
     function renameTaskDescription(task: Task, project: Project){
@@ -196,9 +216,13 @@ export function loopTasks(selectedProject: Project) {
 
         inputValue?.addEventListener('keypress', function(event){
             if(event.key === 'Enter'){
-                if(inputValue?.value)
+                if(inputValue?.value && inputValue.value.trim() !== ''){
                 task.description = inputValue?.value
                 loopTasks(project)
+                }else{
+                    task.description = task.description
+                    loopTasks(project)
+                }
             }
         })
     }

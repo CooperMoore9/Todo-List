@@ -5,7 +5,7 @@ const _1 = require(".");
 const uiUpdater_1 = require("./uiUpdater");
 let projectAddButton = document.querySelector('.addProject');
 exports.taskAddButton = document.querySelector('.addTask');
-const newDate = new Date(2000, 6, 2);
+const newDate = new Date(1995, 6, 2);
 function addProject() {
     projectAddButton.addEventListener('click', () => {
         if (_1.projectsSetup.projects[0]) {

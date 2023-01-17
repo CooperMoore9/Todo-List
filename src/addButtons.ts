@@ -1,9 +1,10 @@
 import { projectsSetup } from '.';
+import { projectSetup } from './todoSetup';
 import { loopProjects, loopTasks, projectIndex} from './uiUpdater';
 
 let projectAddButton = document.querySelector('.addProject') as Element;
 export let taskAddButton = document.querySelector('.addTask') as Element;
-const newDate = new Date(2000, 6, 2);
+const newDate = new Date(1995, 6, 2);
 
 export function addProject(){
     projectAddButton.addEventListener('click', () => {
