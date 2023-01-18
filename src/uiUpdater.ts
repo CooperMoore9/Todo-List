@@ -64,7 +64,7 @@ export function loopTasks(selectedProject: Project) {
             div.appendChild(taskDeleteButton);
 
             taskTitle.classList.add('taskTitle', `taskTitle${task.id}`);
-            taskDescription.classList.add(`taskDescription${task.id}`);
+            taskDescription.classList.add(`taskDescription${task.id}` );
             taskDueDate.classList.add('h-7', `taskDueDate${task.id}`);
 
             taskTitle.textContent = task.title;
@@ -74,8 +74,8 @@ export function loopTasks(selectedProject: Project) {
             taskDescription.textContent = task.description;
             taskDeleteButton.textContent = 'X'
 
-            taskDescription.classList.add('h-full')
-            taskDeleteButton.classList.add('w-7', 'ml-36')
+            taskDescription.classList.add('h-full', 'taskDesc')
+            taskDeleteButton.classList.add('deleteButton')
             div.classList.add('task');
 
             taskTitle.style.cursor = 'pointer'

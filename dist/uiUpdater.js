@@ -58,8 +58,8 @@ function loopTasks(selectedProject) {
         taskDueDate.textContent = `Due: ${(0, date_fns_1.format)((0, date_fns_1.parseISO)(ISODate), 'P')}`;
         taskDescription.textContent = task.description;
         taskDeleteButton.textContent = 'X';
-        taskDescription.classList.add('h-full');
-        taskDeleteButton.classList.add('w-7', 'ml-36');
+        taskDescription.classList.add('h-full', 'taskDesc');
+        taskDeleteButton.classList.add('deleteButton');
         div.classList.add('task');
         taskTitle.style.cursor = 'pointer';
         taskDescription.style.cursor = 'pointer';
