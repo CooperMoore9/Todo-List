@@ -56,18 +56,27 @@ export function loopTasks(selectedProject: Project) {
             let taskTitle = document.createElement('div');
             let taskDueDate = document.createElement('div');
             let taskDescription = document.createElement('div');
+
+            let buttonContainer = document.createElement('div')
             let taskDeleteButton = document.createElement('button');
+            let taskFinishedButton = document.createElement('button')
 
             div.appendChild(taskTitle);
             div.appendChild(taskDueDate);
             div.appendChild(taskDescription);
-            div.appendChild(taskDeleteButton);
+
+            div.appendChild(buttonContainer);
+            buttonContainer.appendChild(taskFinishedButton);
+            buttonContainer.appendChild(taskDeleteButton);
+            
 
             taskTitle.classList.add('taskTitle', `taskTitle${task.id}`);
             taskDescription.classList.add(`taskDescription${task.id}` );
             taskDueDate.classList.add('h-7', `taskDueDate${task.id}`);
+            taskFinishedButton.classList.add('finishedButton')
 
             taskTitle.textContent = task.title;
+            taskFinishedButton.textContent = 'Done?'
             task.dueDate = new Date(task.dueDate);
             const ISODate = new Date(task.dueDate).toISOString();
             taskDueDate.textContent = `Due: ${format(parseISO(ISODate), 'P')}`; 
@@ -76,7 +85,7 @@ export function loopTasks(selectedProject: Project) {
 
             taskDescription.classList.add('h-full', 'taskDesc')
             taskDeleteButton.classList.add('deleteButton')
-            div.classList.add('task');
+            div.classList.add(`task`, `task${task.id}`);
 
             taskTitle.style.cursor = 'pointer'
             taskDescription.style.cursor = 'pointer'
@@ -88,10 +97,27 @@ export function loopTasks(selectedProject: Project) {
             taskDescription.addEventListener('dblclick', () => renameTaskDescription(task, selectedProject))
             taskDueDate.addEventListener('dblclick', () => dateChange(task, selectedProject))
             taskDeleteButton.addEventListener('click', () => deleteTask(task))
+            taskFinishedButton.addEventListener('click', () => changeCompletionTask(task))
 
+            taskComplete(task)
         })
         localProjectStorage();
     };
+
+    function changeCompletionTask(task: Task) {
+        task.completed = !task.completed
+        taskComplete(task)
+    }
+
+    function taskComplete(task: Task) {
+        let taskBG = document.querySelector(`.task${task.id}`)
+        if(task.completed === true){
+            taskBG?.classList.add('taskCompleted')
+        }else{
+            taskBG?.classList.remove('taskCompleted')
+        }
+        loopProjects()
+    }
 
     export function refreshProjects() {
         const deleteProjects = document.querySelectorAll('.project');

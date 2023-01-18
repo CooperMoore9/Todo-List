@@ -19,6 +19,6 @@ export function getLocalStorage() {
 
 function populateTasks(thisProject: Project, tasks:TaskInterface[]) {
     tasks.forEach((task:Task) => {
-        thisProject.addTask(task.title, task.dueDate, task.description)
+        thisProject.addTask(task.title, task.dueDate, task.description, task.completed)
     })
 };

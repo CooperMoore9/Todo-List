@@ -36,7 +36,7 @@ function addTask() {
             _1.projectsSetup.projects[uiUpdater_1.projectIndex].tasks.forEach(task => {
                 numOfTasks += 1;
             });
-            _1.projectsSetup.projects[uiUpdater_1.projectIndex].addTask(`Task ${numOfTasks}`, newDate, 'Description');
+            _1.projectsSetup.projects[uiUpdater_1.projectIndex].addTask(`Task ${numOfTasks}`, newDate, 'Description', false);
             (0, uiUpdater_1.loopTasks)(_1.projectsSetup.projects[uiUpdater_1.projectIndex]);
         }
         else {

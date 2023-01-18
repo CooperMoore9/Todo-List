@@ -23,7 +23,7 @@ exports.getLocalStorage = getLocalStorage;
 ;
 function populateTasks(thisProject, tasks) {
     tasks.forEach((task) => {
-        thisProject.addTask(task.title, task.dueDate, task.description);
+        thisProject.addTask(task.title, task.dueDate, task.description, task.completed);
     });
 }
 ;

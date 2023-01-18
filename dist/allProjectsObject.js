@@ -28,8 +28,8 @@ class Project {
         this.id = (0, uuid_1.v4)();
     }
     ;
-    addTask(title, dueDate, description) {
-        let newTask = new Task(title, dueDate, description);
+    addTask(title, dueDate, description, completed) {
+        let newTask = new Task(title, dueDate, description, completed);
         this.tasks.push(newTask);
     }
     ;
@@ -37,11 +37,12 @@ class Project {
 exports.Project = Project;
 ;
 class Task {
-    constructor(title, dueDate, description) {
+    constructor(title, dueDate, description, completed) {
         this.title = title;
         this.dueDate = dueDate;
         this.description = description;
         this.id = (0, uuid_1.v4)();
+        this.completed = completed;
     }
     ;
 }
