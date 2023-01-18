@@ -129,13 +129,30 @@ html {
     outline:none!important;
   }
   
+  .taskCompleted {
+    background-color: #34b233;
+  }
+  
   .taskDesc {
     max-width: 13rem;
     overflow-wrap: break-word;
   }
 
   .deleteButton {
-    margin-left: 12em;
+    margin-left: 8em;
+  }
+
+  .finishedButton {
+    background-color: white;
+    border-style: solid;
+    border-width: 0.1em;
+    border-radius: 8px;
+    border-color: black;
+    padding: 2px;
+  }
+
+  .finishedButton:hover {
+    background-color: gainsboro;
   }
 
   .addTask {

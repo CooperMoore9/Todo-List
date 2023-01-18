@@ -44,15 +44,21 @@ function loopTasks(selectedProject) {
         let taskTitle = document.createElement('div');
         let taskDueDate = document.createElement('div');
         let taskDescription = document.createElement('div');
+        let buttonContainer = document.createElement('div');
         let taskDeleteButton = document.createElement('button');
+        let taskFinishedButton = document.createElement('button');
         div.appendChild(taskTitle);
         div.appendChild(taskDueDate);
         div.appendChild(taskDescription);
-        div.appendChild(taskDeleteButton);
+        div.appendChild(buttonContainer);
+        buttonContainer.appendChild(taskFinishedButton);
+        buttonContainer.appendChild(taskDeleteButton);
         taskTitle.classList.add('taskTitle', `taskTitle${task.id}`);
         taskDescription.classList.add(`taskDescription${task.id}`);
         taskDueDate.classList.add('h-7', `taskDueDate${task.id}`);
+        taskFinishedButton.classList.add('finishedButton');
         taskTitle.textContent = task.title;
+        taskFinishedButton.textContent = 'Done?';
         task.dueDate = new Date(task.dueDate);
         const ISODate = new Date(task.dueDate).toISOString();
         taskDueDate.textContent = `Due: ${(0, date_fns_1.format)((0, date_fns_1.parseISO)(ISODate), 'P')}`;
@@ -60,7 +66,7 @@ function loopTasks(selectedProject) {
         taskDeleteButton.textContent = 'X';
         taskDescription.classList.add('h-full', 'taskDesc');
         taskDeleteButton.classList.add('deleteButton');
-        div.classList.add('task');
+        div.classList.add(`task`, `task${task.id}`);
         taskTitle.style.cursor = 'pointer';
         taskDescription.style.cursor = 'pointer';
         taskDueDate.style.cursor = 'pointer';
@@ -69,11 +75,27 @@ function loopTasks(selectedProject) {
         taskDescription.addEventListener('dblclick', () => renameTaskDescription(task, selectedProject));
         taskDueDate.addEventListener('dblclick', () => dateChange(task, selectedProject));
         taskDeleteButton.addEventListener('click', () => deleteTask(task));
+        taskFinishedButton.addEventListener('click', () => changeCompletionTask(task));
+        taskComplete(task);
     });
     (0, localStorage_1.localProjectStorage)();
 }
 exports.loopTasks = loopTasks;
 ;
+function changeCompletionTask(task) {
+    task.completed = !task.completed;
+    taskComplete(task);
+}
+function taskComplete(task) {
+    let taskBG = document.querySelector(`.task${task.id}`);
+    if (task.completed === true) {
+        taskBG === null || taskBG === void 0 ? void 0 : taskBG.classList.add('taskCompleted');
+    }
+    else {
+        taskBG === null || taskBG === void 0 ? void 0 : taskBG.classList.remove('taskCompleted');
+    }
+    loopProjects();
+}
 function refreshProjects() {
     const deleteProjects = document.querySelectorAll('.project');
     deleteProjects.forEach((div) => {
