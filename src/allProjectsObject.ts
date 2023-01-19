@@ -32,7 +32,7 @@ export class AllProjects implements allProjectsInterface {
 
 // Project Objects
 interface ProjectInterface {
-    addTask(title: string, dueDate: Date, description: string, completed: boolean): void;
+    addTask(title: string, dueDate: Date, description: string, completed: boolean, severity: string): void;
     name: string;
     tasks: TaskInterface[];
     id: string;
@@ -49,8 +49,8 @@ export class Project implements ProjectInterface {
         this.id = uuidv4();
     };
 
-    addTask(title: string, dueDate: Date, description: string, completed: boolean) {
-        let newTask = new Task(title, dueDate, description, completed);
+    addTask(title: string, dueDate: Date, description: string, completed: boolean, severity: string) {
+        let newTask = new Task(title, dueDate, description, completed, severity);
         this.tasks.push(newTask);
     };
 
@@ -64,6 +64,7 @@ export interface TaskInterface {
     description: string;
     id: string;
     completed: boolean;
+    severity: string;
 }
 
 export class Task implements TaskInterface {
@@ -73,13 +74,15 @@ export class Task implements TaskInterface {
     description: string;
     id: string;
     completed: boolean;
+    severity: string;
 
-    constructor(title: string, dueDate: Date, description: string, completed: boolean) {
+    constructor(title: string, dueDate: Date, description: string, completed: boolean, severity: string) {
         this.title = title;
         this.dueDate = dueDate;
         this.description = description;
         this.id =  uuidv4()
         this.completed = completed
+        this.severity = severity
     };
 
 };

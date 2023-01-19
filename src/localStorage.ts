@@ -1,6 +1,7 @@
 import { parse } from "date-fns";
 import { projectsSetup } from ".";
 import { Project, Task, TaskInterface } from "./allProjectsObject";
+import { projectSetup } from "./todoSetup";
 
 export function localProjectStorage() {
     localStorage.setItem('allProjects', JSON.stringify(projectsSetup));
@@ -19,6 +20,6 @@ export function getLocalStorage() {
 
 function populateTasks(thisProject: Project, tasks:TaskInterface[]) {
     tasks.forEach((task:Task) => {
-        thisProject.addTask(task.title, task.dueDate, task.description, task.completed)
+        thisProject.addTask(task.title, task.dueDate, task.description, task.completed, task.severity)
     })
 };

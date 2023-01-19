@@ -583,10 +583,6 @@ video {
   width: 1.75rem;
 }
 
-.max-w-\[13rem\] {
-  max-width: 13rem;
-}
-
 .flex-wrap {
   flex-wrap: wrap;
 }
@@ -601,11 +597,6 @@ video {
 
 .justify-around {
   justify-content: space-around;
-}
-
-.break-normal {
-  overflow-wrap: normal;
-  word-break: normal;
 }
 
 .rounded {
@@ -744,8 +735,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border-style: solid;
   border-width: 0.2em;
   border-color: black;
-  height: 15em;
-  width: 15em;
+  height: 16em;
+  width: 16em;
   overflow: auto;
   border-radius: 2em;
   padding: 0.3em;
@@ -782,13 +773,43 @@ input:focus {
   outline:none!important;
 }
 
+.taskCompleted {
+  background-color: #34b233;
+}
+
 .taskDesc {
   max-width: 13rem;
   overflow-wrap: break-word;
 }
 
-.deleteButton {
-  margin-left: 12em;
+.titleBox {
+  display: flex;
+  width: 13em;
+  justify-content: center;
+  gap: .5em;
+}
+
+.buttonContainer {
+  display: flex;
+  width: 15em;
+  justify-content: space-around;
+}
+
+.dropDown {
+  width: 6em;
+}
+
+.finishedButton {
+  background-color: white;
+  border-style: solid;
+  border-width: 0.1em;
+  border-radius: 8px;
+  border-color: black;
+  padding: 2px;
+}
+
+.finishedButton:hover {
+  background-color: gainsboro;
 }
 
 .addTask {
