@@ -7,9 +7,17 @@ import { format, compareAsc, parseISO, addDays } from 'date-fns'
 export let projectAddButton = document.querySelector('.addProject') as Element;
 export let projectIndex = 0;
 
+enum dropDownBox {
+    Severe = 'Severe',
+    Moderate = 'Moderate',
+    Low = 'Low',
+    None = 'None'
+}
+
 let projectList = document.querySelector('.projects') as Element;
 let projectTasks = document.querySelector('.projectTasks') as Element;
 const taskHeader = document.querySelector('.taskHeader') as Element;
+const dropDownList = Object.values(dropDownBox)
 
 export function loopProjects() {
     refreshProjects()
@@ -52,31 +60,49 @@ export function loopProjects() {
 export function loopTasks(selectedProject: Project) {
     refreshTasks()
         selectedProject.tasks.forEach(task => {
+
             let div = document.createElement('div');
+            let titleContainer = document.createElement('div');
             let taskTitle = document.createElement('div');
             let taskDueDate = document.createElement('div');
             let taskDescription = document.createElement('div');
 
-            let buttonContainer = document.createElement('div')
+            let buttonContainer = document.createElement('div');
             let taskDeleteButton = document.createElement('button');
-            let taskFinishedButton = document.createElement('button')
+            let taskFinishedButton = document.createElement('button');
+            let dropDown = document.createElement('select');
 
-            div.appendChild(taskTitle);
+            div.appendChild(titleContainer);
+
+            titleContainer.appendChild(taskTitle);
+
             div.appendChild(taskDueDate);
             div.appendChild(taskDescription);
 
             div.appendChild(buttonContainer);
             buttonContainer.appendChild(taskFinishedButton);
-            buttonContainer.appendChild(taskDeleteButton);
-            
+            buttonContainer.appendChild(dropDown);
+            buttonContainer.appendChild(taskDeleteButton);    
 
+            buttonContainer.classList.add('buttonContainer')
+            titleContainer.classList.add('titleBox', `titleBox${task.id}`)
             taskTitle.classList.add('taskTitle', `taskTitle${task.id}`);
             taskDescription.classList.add(`taskDescription${task.id}` );
             taskDueDate.classList.add('h-7', `taskDueDate${task.id}`);
             taskFinishedButton.classList.add('finishedButton')
+            dropDown.classList.add('dropDown')
+
+            dropDownList.forEach(severity => {
+                let dropOption = document.createElement('option');
+                dropOption.setAttribute('value', severity);
+                dropOption.textContent = severity;
+                dropDown.appendChild(dropOption);
+                dropOption.classList.add(severity)
+            });
+
 
             taskTitle.textContent = task.title;
-            taskFinishedButton.textContent = 'Done?'
+            taskFinishedButton.textContent = 'Done'
             task.dueDate = new Date(task.dueDate);
             const ISODate = new Date(task.dueDate).toISOString();
             taskDueDate.textContent = `Due: ${format(parseISO(ISODate), 'P')}`; 
@@ -98,11 +124,19 @@ export function loopTasks(selectedProject: Project) {
             taskDueDate.addEventListener('dblclick', () => dateChange(task, selectedProject))
             taskDeleteButton.addEventListener('click', () => deleteTask(task))
             taskFinishedButton.addEventListener('click', () => changeCompletionTask(task))
+            dropDown.addEventListener('change', () => changeSeverity(dropDown.value, task))
 
+            
+            dropDown.value = task.severity
             taskComplete(task)
         })
         localProjectStorage();
     };
+
+    function changeSeverity(value: string, task: Task){
+        task.severity = value;
+        loopProjects()
+    }
 
     function changeCompletionTask(task: Task) {
         task.completed = !task.completed
@@ -110,11 +144,11 @@ export function loopTasks(selectedProject: Project) {
     }
 
     function taskComplete(task: Task) {
-        let taskBG = document.querySelector(`.task${task.id}`)
+        let taskBackground = document.querySelector(`.task${task.id}`)
         if(task.completed === true){
-            taskBG?.classList.add('taskCompleted')
+            taskBackground?.classList.add('taskCompleted')
         }else{
-            taskBG?.classList.remove('taskCompleted')
+            taskBackground?.classList.remove('taskCompleted')
         }
         loopProjects()
     }

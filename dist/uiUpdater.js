@@ -7,9 +7,17 @@ const localStorage_1 = require("./localStorage");
 const date_fns_1 = require("date-fns");
 exports.projectAddButton = document.querySelector('.addProject');
 exports.projectIndex = 0;
+var dropDownBox;
+(function (dropDownBox) {
+    dropDownBox["Severe"] = "Severe";
+    dropDownBox["Moderate"] = "Moderate";
+    dropDownBox["Low"] = "Low";
+    dropDownBox["None"] = "None";
+})(dropDownBox || (dropDownBox = {}));
 let projectList = document.querySelector('.projects');
 let projectTasks = document.querySelector('.projectTasks');
 const taskHeader = document.querySelector('.taskHeader');
+const dropDownList = Object.values(dropDownBox);
 function loopProjects() {
     refreshProjects();
     taskHeaderFix();
@@ -41,24 +49,38 @@ function loopTasks(selectedProject) {
     refreshTasks();
     selectedProject.tasks.forEach(task => {
         let div = document.createElement('div');
+        let titleContainer = document.createElement('div');
         let taskTitle = document.createElement('div');
         let taskDueDate = document.createElement('div');
         let taskDescription = document.createElement('div');
         let buttonContainer = document.createElement('div');
         let taskDeleteButton = document.createElement('button');
         let taskFinishedButton = document.createElement('button');
-        div.appendChild(taskTitle);
+        let dropDown = document.createElement('select');
+        div.appendChild(titleContainer);
+        titleContainer.appendChild(taskTitle);
         div.appendChild(taskDueDate);
         div.appendChild(taskDescription);
         div.appendChild(buttonContainer);
         buttonContainer.appendChild(taskFinishedButton);
+        buttonContainer.appendChild(dropDown);
         buttonContainer.appendChild(taskDeleteButton);
+        buttonContainer.classList.add('buttonContainer');
+        titleContainer.classList.add('titleBox', `titleBox${task.id}`);
         taskTitle.classList.add('taskTitle', `taskTitle${task.id}`);
         taskDescription.classList.add(`taskDescription${task.id}`);
         taskDueDate.classList.add('h-7', `taskDueDate${task.id}`);
         taskFinishedButton.classList.add('finishedButton');
+        dropDown.classList.add('dropDown');
+        dropDownList.forEach(severity => {
+            let dropOption = document.createElement('option');
+            dropOption.setAttribute('value', severity);
+            dropOption.textContent = severity;
+            dropDown.appendChild(dropOption);
+            dropOption.classList.add(severity);
+        });
         taskTitle.textContent = task.title;
-        taskFinishedButton.textContent = 'Done?';
+        taskFinishedButton.textContent = 'Done';
         task.dueDate = new Date(task.dueDate);
         const ISODate = new Date(task.dueDate).toISOString();
         taskDueDate.textContent = `Due: ${(0, date_fns_1.format)((0, date_fns_1.parseISO)(ISODate), 'P')}`;
@@ -76,23 +98,29 @@ function loopTasks(selectedProject) {
         taskDueDate.addEventListener('dblclick', () => dateChange(task, selectedProject));
         taskDeleteButton.addEventListener('click', () => deleteTask(task));
         taskFinishedButton.addEventListener('click', () => changeCompletionTask(task));
+        dropDown.addEventListener('change', () => changeSeverity(dropDown.value, task));
+        dropDown.value = task.severity;
         taskComplete(task);
     });
     (0, localStorage_1.localProjectStorage)();
 }
 exports.loopTasks = loopTasks;
 ;
+function changeSeverity(value, task) {
+    task.severity = value;
+    loopProjects();
+}
 function changeCompletionTask(task) {
     task.completed = !task.completed;
     taskComplete(task);
 }
 function taskComplete(task) {
-    let taskBG = document.querySelector(`.task${task.id}`);
+    let taskBackground = document.querySelector(`.task${task.id}`);
     if (task.completed === true) {
-        taskBG === null || taskBG === void 0 ? void 0 : taskBG.classList.add('taskCompleted');
+        taskBackground === null || taskBackground === void 0 ? void 0 : taskBackground.classList.add('taskCompleted');
     }
     else {
-        taskBG === null || taskBG === void 0 ? void 0 : taskBG.classList.remove('taskCompleted');
+        taskBackground === null || taskBackground === void 0 ? void 0 : taskBackground.classList.remove('taskCompleted');
     }
     loopProjects();
 }

@@ -38,7 +38,7 @@ export function addTask(){
                 numOfTasks+=1
             })
 
-            projectsSetup.projects[projectIndex].addTask(`Task ${numOfTasks}`, newDate , 'Description', false)
+            projectsSetup.projects[projectIndex].addTask(`Task ${numOfTasks}`, newDate , 'Description', false, 'None')
             loopTasks(projectsSetup.projects[projectIndex]);
 
 
