@@ -648,10 +648,12 @@ video {
 
 html {
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
   margin: 0;
 }
@@ -695,9 +697,10 @@ header {
   min-height: 93vh;
 }
 
-.projectHeader, .taskHeader {
+.projectHeader,
+.taskHeader {
   display: flex;
-  padding: .5em;
+  padding: 0.5em;
   border-bottom-style: solid;
   border-color: dimgray;
   border-bottom-width: 0.2em;
@@ -723,8 +726,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   flex-wrap: wrap;
   align-items: center;
   max-height: 100%;
-  gap: .8em;
-  padding: .8em;
+  gap: 0.8em;
+  padding: 0.8em;
 }
 
 .task {
@@ -747,7 +750,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   min-height: auto;
 }
 
-.project.addProject, .task.addTask {
+.project.addProject,
+.task.addTask {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -770,7 +774,7 @@ input {
 }
 
 input:focus {
-  outline:none!important;
+  outline: none !important;
 }
 
 .taskCompleted {
@@ -786,7 +790,7 @@ input:focus {
   display: flex;
   width: 13em;
   justify-content: center;
-  gap: .5em;
+  gap: 0.5em;
 }
 
 .buttonContainer {
@@ -820,15 +824,16 @@ input:focus {
   border-style: solid;
   border-width: 0.2em;
   border-color: black;
-  height: 15em;
-  width: 15em;
+  height: 16em;
+  width: 16em;
   overflow: auto;
   border-radius: 2em;
   padding: 0.3em;
   gap: 6px;
 }
 
-.project.addProject:hover, .task.addTask:hover {
+.project.addProject:hover,
+.task.addTask:hover {
   background-color: lightgrey;
 }
 
